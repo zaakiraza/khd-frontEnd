@@ -1,0 +1,62 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.about {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 40vh;
+  gap: 18px;
+  background-color: #e4e7e9;
+}
+
+.about h1,
+.learn h1 {
+  font-size: 45px;
+  color: #6a6944;
+}
+
+.about hr,
+.learn hr {
+  height: 2px;
+  width: 18%;
+  border: 1px solid #7a782b;
+  background-color: #7a782b;
+}
+
+.text {
+  line-height: 32px;
+  text-align: center;
+  font-size: 18px;
+  color: #7a7a7a;
+}
+
+span {
+  color: #6a6944;
+  font-weight: 700;
+}
+
+.learn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 65vh;
+  gap: 18px;
+  background-color: #f2f2f2;
+}
+
+.boxes {
+  display: flex;
+  gap: 45px;
+  justify-content: center;
+  align-items: center;
+}
+
+.boxes img {
+    width: 18%;
+}
