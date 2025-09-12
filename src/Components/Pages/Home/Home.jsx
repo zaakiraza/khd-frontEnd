@@ -1,4 +1,3 @@
-import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Home.css";
 
@@ -8,7 +7,7 @@ function Home() {
     navigate("/new-admission/form");
   };
   return (
-    <div className="home">
+    <div className="home" id="home">
       <h1>KHUDDAM LEARNING ONLINE</h1>
       <hr />
       <div className="details">

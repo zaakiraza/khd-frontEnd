@@ -1,10 +1,9 @@
-import React from "react";
 import "./About.css";
 
 function About() {
   return (
     <>
-      <div className="about">
+      <div className="about" id="about">
         <h1>About Us</h1>
         <hr />
         <div className="text">
@@ -27,10 +26,10 @@ function About() {
         <h1>What You Will Learn</h1>
         <hr />
         <div className="boxes">
-            <img src="/box1.png" alt="" />
-            <img src="/box2.png" alt="" />
-            <img src="/box3.png" alt="" />
-            <img src="/box4.png" alt="" />
+          <img src="/box1.png" alt="" />
+          <img src="/box2.png" alt="" />
+          <img src="/box3.png" alt="" />
+          <img src="/box4.png" alt="" />
         </div>
       </div>
     </>

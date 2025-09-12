@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function LoginUser() {
   return (
@@ -15,6 +16,7 @@ function LoginUser() {
         </div>
         <button type="submit">Login</button>
       </form>
+      <Link to="/home">Home</Link>
     </div>
   );
 }

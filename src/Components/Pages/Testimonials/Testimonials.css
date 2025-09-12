@@ -8,14 +8,16 @@
   background-color: #e4e7e9;
 }
 
-.testi h1 {
+.testi h1,
+.recent h1 {
   font-size: 45px;
   color: #a48a2c;
   font-weight: bold;
   text-align: center;
 }
 
-.testi hr {
+.testi hr,
+.recent hr {
   height: 2px;
   width: 40%;
   border: none;
@@ -115,4 +117,76 @@
 }
 .dot.active {
   background: #a48a2c;
+}
+
+/* Recent Lectures Videos Grid */
+.recent {
+  width: 100%;
+  max-width: 1200px;
+  margin: 70px auto 40px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 40px;
+}
+
+.youVideos {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.videosGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 40px 50px;
+  width: 100%;
+}
+
+.videoWrapper {
+  width: 100%;
+  position: relative;
+  z-index: -2;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.videoWrapper:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.videoWrapper iframe {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 16 / 9;
+  border: none;
+  display: block;
+}
+
+.videoTitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+  margin-top: 10px;
+  line-height: 1.35;
+  text-align: left;
+  font-family: "Poppins", sans-serif;
+}
+
+@media (max-width: 900px) {
+  .videosGrid {
+    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .recent h1 {
+    font-size: 36px;
+  }
+  .videoTitle {
+    font-size: 14px;
+  }
 }

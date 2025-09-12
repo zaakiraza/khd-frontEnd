@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./AdmissionForm.css";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function AdmissionForm() {
   const BASEURL = import.meta.env.VITE_BASEURL;
@@ -545,7 +546,7 @@ export default function AdmissionForm() {
                   onChange={(e) => {
                     const v = e.target.value;
                     clearError("dob");
-                    clearError("age")
+                    clearError("age");
                     setPersonal_info((prev) => ({
                       ...prev,
                       dob: v,
@@ -1402,6 +1403,8 @@ export default function AdmissionForm() {
           style={isSubmitting ? { opacity: 0.7, cursor: "not-allowed" } : {}}
         />
       </form>
+
+      <Link to="/home">Home</Link>
     </div>
   );
 }

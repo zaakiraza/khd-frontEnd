@@ -33,6 +33,11 @@ a {
   z-index: -1;
   background-color: #293c5d;
   opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+.Navbar.scrolled::before {
+  opacity: 1;
 }
 
 .navItems {
