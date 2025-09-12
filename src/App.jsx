@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import NewAdmissions from "./Components/Pages/AdmissionForms/AdmissionForm";
-import NotFound from "./Components/Common/NotFound";
+import NotFound from "./Components/Common/NotFound/NotFound";
 import LandingPage from "./Components/Pages/LandingPage/LandingPage";
 import LoginStudent from "./Components/Pages/Login/LoginUser";
 import Navbar from "./Components/Common/Navbar/Navbar";
@@ -9,11 +9,11 @@ import "./index.css";
 
 function App() {
   const location = useLocation();
-  const hideNavbarRoutes = ["/login-student", "/new-admission/form"];
-  const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname);
+  const navbarVisibleRoutes = ["/", "/home"];
+  const showNavbar = navbarVisibleRoutes.includes(location.pathname);
   return (
     <>
-      {!shouldHideNavbar && <Navbar />}
+      {showNavbar && <Navbar />}
 
       <Routes>
         {/* Public Routes */}

@@ -20,9 +20,21 @@ function Contact() {
             </a>
           </p>
           <div className="logos">
-            <i className="fa-brands fa-facebook"></i>
-            <i className="fa-brands fa-x-twitter"></i>
-            <i className="fa-brands fa-youtube"></i>
+            <a
+              href="https://www.facebook.com/khuddamonline?mibextid=ZbWKwL"
+              target="_blank"
+            >
+              <i className="fa-brands fa-facebook"></i>
+            </a>
+            <a>
+              <i className="fa-brands fa-x-twitter"></i>
+            </a>
+            <a
+              href="https://www.youtube.com/@khuddamlearningonline"
+              target="_blank"
+            >
+              <i className="fa-brands fa-youtube"></i>
+            </a>
           </div>
         </div>
         <div className="image">
