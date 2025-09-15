@@ -1,9 +1,12 @@
 import { Routes, Route } from "react-router-dom";
 import NewAdmissions from "./Components/Pages/AdmissionForms/AdmissionForm";
 import NotFound from "./Components/Common/NotFound/NotFound";
-import LandingPage from "./Components/Pages/LandingPage/LandingPage";
+import LandingPage from "./Components/Pages/Landing/LandingPage/LandingPage";
 import LoginStudent from "./Components/Pages/Login/LoginUser";
 import Navbar from "./Components/Common/Navbar/Navbar";
+import StudentDashboard from "./Components/Pages/StudentDashboard.jsx/StudentDashboard";
+import VerifyOtp from "./Components/Pages/VerifyOtp/VerifyOtp";
+import PrivateRoute from "./Components/Routes/PrivateRoutes";
 import { useLocation } from "react-router-dom";
 import "./index.css";
 
@@ -23,6 +26,12 @@ function App() {
 
         {/* LOGIN STUDENT */}
         <Route path="/login-student" element={<LoginStudent />} />
+
+        {/* Private Routes */}
+        <Route element={<PrivateRoute />}>
+          <Route path="/UserDashboard" element={<StudentDashboard />} />
+          <Route path="/verify-otp" element={<VerifyOtp />} />
+        </Route>
 
         {/* Not Found Route */}
         <Route path="*" element={<NotFound />} />

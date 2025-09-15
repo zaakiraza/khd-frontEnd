@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./AdmissionForm.css";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function AdmissionForm() {
   const BASEURL = import.meta.env.VITE_BASEURL;
@@ -9,7 +9,7 @@ export default function AdmissionForm() {
     import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || ""
   ).toLowerCase();
   const UPLOAD_PRESET = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
-
+  const navigate = useNavigate();
   const currentYear = new Date().getFullYear().toString();
 
   const [personal_info, setPersonal_info] = useState({
@@ -62,7 +62,7 @@ export default function AdmissionForm() {
     CNIC: "",
   });
 
-  const [formattedData, setFormattedData] = useState({});
+  // const [formattedData, setFormattedData] = useState({});
 
   const [errors, setErrors] = useState({});
   const [togglefirst, setTogglefirst] = useState("▸");
@@ -77,12 +77,12 @@ export default function AdmissionForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [guardianWhatsappCode, setGuardianWhatsappCode] = useState("+92");
 
-  const formatDobWithSlashes = (d) => {
-    if (!d) return "";
-    const parts = d.split("-");
-    if (parts.length === 3) return `${parts[2]}/${parts[1]}/${parts[0]}`;
-    return d;
-  };
+  // const formatDobWithSlashes = (d) => {
+  //   if (!d) return "";
+  //   const parts = d.split("-");
+  //   if (parts.length === 3) return `${parts[2]}/${parts[1]}/${parts[0]}`;
+  //   return d;
+  // };
 
   const countryCodes = [
     { code: "+92", label: "PK +92" },
@@ -227,11 +227,11 @@ export default function AdmissionForm() {
     if (!fileInput) return null;
     const formData = new FormData();
     formData.append("file", fileInput);
-    formData.append("upload_preset", "khuddamlearningonlineclasses");
+    formData.append("upload_preset", `${CLOUD_NAME}`);
     formData.append("folder", folderName);
     try {
       const response = await fetch(
-        "https://api.cloudinary.com/v1_1/dvo8ftbqu/image/upload",
+        `https://api.cloudinary.com/v1_1/${UPLOAD_PRESET}/image/upload`,
         {
           method: "POST",
           body: formData,
@@ -294,7 +294,9 @@ export default function AdmissionForm() {
             if (el.focus)
               try {
                 el.focus();
-              } catch (_) {}
+              } catch (e) {
+                console.log("Focus error", e);
+              }
           }
         }
       }, 50);
@@ -339,11 +341,13 @@ export default function AdmissionForm() {
           CNIC: guardian_info.CNIC || guardian_info.cnic,
         },
       };
-      setFormattedData(payload);
-      console.log("Submitting payload:", payload);
+      // setFormattedData(payload);
+      // console.log("Submitting payload:", payload);
       const api = await axios.post(`${BASEURL}/auth/signup`, payload);
       if (api?.data?.status) {
         alert("User successfully registered!");
+        localStorage.setItem("token", api.data.data.token);
+        navigate("/verify-otp");
       }
     } catch (err) {
       console.log(err);
@@ -355,7 +359,12 @@ export default function AdmissionForm() {
 
   return (
     <>
-      <Link to={"/"} className="backHome">Back To Home</Link>
+      <a href="/" className="backHome">
+        Back To Home
+      </a>
+      {/* <Link to={"/home"} className="backHome">
+        Back To Home
+      </Link> */}
       <div className="formDiv">
         <div className="formHeader">
           <img src="/logo.png" alt="" />
@@ -447,7 +456,7 @@ export default function AdmissionForm() {
                     position: "absolute",
                     bottom: 4,
                     right: 4,
-                    background: "#2563eb",
+                    background: "#887137",
                     color: "#fff",
                     padding: "6px 10px",
                     borderRadius: 20,
@@ -1425,7 +1434,6 @@ export default function AdmissionForm() {
             style={isSubmitting ? { opacity: 0.7, cursor: "not-allowed" } : {}}
           />
         </form>
-
       </div>
     </>
   );
