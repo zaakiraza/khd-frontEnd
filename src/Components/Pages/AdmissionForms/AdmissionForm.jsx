@@ -350,13 +350,14 @@ export default function AdmissionForm() {
         navigate("/verify-otp");
       }
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       alert(err.response?.data.message || "Upload failed");
     } finally {
       setIsSubmitting(false);
     }
   };
 
+  const numberArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   return (
     <>
       <a href="/" className="backHome">
@@ -508,6 +509,7 @@ export default function AdmissionForm() {
                   <label className="formLabel">First Name*</label>
                   <input
                     type="text"
+                    placeholder="Asad"
                     data-field="first_name"
                     className={`formInput ${
                       errors.first_name ? "invalid" : ""
@@ -531,6 +533,7 @@ export default function AdmissionForm() {
                     Father Name*
                   </label>
                   <input
+                    placeholder="akber ali"
                     type="text"
                     data-field="father_name"
                     className={`formInput ${
@@ -575,7 +578,7 @@ export default function AdmissionForm() {
                 {/* Whatsapp no */}
                 <div className="formGroup">
                   <label htmlFor="whatsapp_no" className="formLabel">
-                    Whatsapp No*
+                    Whatsapp No* <br /> Ex-+92 300XXXXXXX
                   </label>
                   <div style={{ display: "flex", gap: "6px" }}>
                     <select
@@ -629,11 +632,12 @@ export default function AdmissionForm() {
                 {/* CNIC */}
                 <div className="formGroup">
                   <label htmlFor="cnic" className="formLabel">
-                    CNIC*
+                    CNIC / Bay-Form No*
                   </label>
                   <input
                     type="text"
                     data-field="CNIC"
+                    placeholder="Ex- 3520212345671"
                     className={`formInput ${errors.CNIC ? "invalid" : ""}`}
                     onChange={(e) => {
                       clearError("CNIC");
@@ -654,6 +658,7 @@ export default function AdmissionForm() {
                   <input
                     type="text"
                     data-field="city"
+                    placeholder="Karachi"
                     className={`formInput ${errors.city ? "invalid" : ""}`}
                     onChange={(e) => {
                       clearError("city");
@@ -674,6 +679,7 @@ export default function AdmissionForm() {
                   <input
                     type="text"
                     data-field="address"
+                    placeholder="House #, Street #, Area"
                     className={`formInput ${errors.address ? "invalid" : ""}`}
                     onChange={(e) => {
                       clearError("address");
@@ -747,6 +753,7 @@ export default function AdmissionForm() {
                   </label>
                   <input
                     type="text"
+                    placeholder="ali"
                     data-field="last_name"
                     className={`formInput ${errors.last_name ? "invalid" : ""}`}
                     onChange={(e) => {
@@ -802,7 +809,7 @@ export default function AdmissionForm() {
                 {/* alternative_no */}
                 <div className="formGroup">
                   <label htmlFor="alternative_no" className="formLabel">
-                    Alternative No*
+                    Alternative No* <br /> Ex-+92 300XXXXXXX
                   </label>
                   <div style={{ display: "flex", gap: "6px" }}>
                     <select
@@ -860,6 +867,7 @@ export default function AdmissionForm() {
                   </label>
                   <input
                     type="email"
+                    placeholder="example@example.com"
                     data-field="email"
                     className={`formInput ${errors.email ? "invalid" : ""}`}
                     onChange={(e) => {
@@ -880,6 +888,7 @@ export default function AdmissionForm() {
                   </label>
                   <input
                     type="text"
+                    placeholder="Pakistan"
                     data-field="country"
                     className={`formInput ${errors.country ? "invalid" : ""}`}
                     onChange={(e) => {
@@ -965,15 +974,13 @@ export default function AdmissionForm() {
               <div className="left_align">
                 {/* ACADEMIC CLASS */}
                 <div className="formGroup">
-                  <label className="formLabel">
-                    Enter Your Academic Class*
-                  </label>
-                  <input
-                    type="text"
+                  <label className="formLabel">Academic Class*</label>
+                  <select
                     data-field="academic_class"
                     className={`formInput ${
                       errors.academic_class ? "invalid" : ""
                     }`}
+                    value={academic_progress.academic_class}
                     onChange={(e) => {
                       clearError("academic_class");
                       setAcademic_progress({
@@ -981,7 +988,13 @@ export default function AdmissionForm() {
                         academic_class: e.target.value,
                       });
                     }}
-                  />
+                  >
+                    {numberArr.map((num) => (
+                      <option key={num} value={`${num}`}>
+                        Class {num}
+                      </option>
+                    ))}
+                  </select>
                 </div>
                 {errors.academic_class && (
                   <p className="error">{errors.academic_class}</p>
@@ -989,9 +1002,7 @@ export default function AdmissionForm() {
 
                 {/* institute_name */}
                 <div className="formGroup">
-                  <label className="formLabel">
-                    Enter Your Institute Name*
-                  </label>
+                  <label className="formLabel">Institute Name*</label>
                   <input
                     type="text"
                     data-field="institute_name"
@@ -1007,8 +1018,8 @@ export default function AdmissionForm() {
                     }}
                   />
                 </div>
-                {errors.institute_name && (
-                  <p className="error">{errors.institute_name}</p>
+                {errors.academic_class && (
+                  <p className="error">{errors.academic_class}</p>
                 )}
               </div>
               <div className="right_align">
@@ -1074,7 +1085,7 @@ export default function AdmissionForm() {
                     Result
                     {academic_progress.inProgress === "no"
                       ? "*"
-                      : " (auto pending)"}
+                      : " (Auto if Yes)"}
                   </label>
                   <select
                     disabled={academic_progress.inProgress === "yes"}
@@ -1118,10 +1129,11 @@ export default function AdmissionForm() {
               <div className="left_align">
                 {/* name */}
                 <div className="formGroup">
-                  <label className="formLabel">Enter Your Guardian Name*</label>
+                  <label className="formLabel">Guardian Name*</label>
                   <input
                     type="text"
                     data-field="guardian_name"
+                    placeholder="john doe"
                     className={`formInput ${
                       errors.guardian_name ? "invalid" : ""
                     }`}
@@ -1140,11 +1152,10 @@ export default function AdmissionForm() {
 
                 {/* email */}
                 <div className="formGroup">
-                  <label className="formLabel">
-                    Enter Your Guardian Email*
-                  </label>
+                  <label className="formLabel">Guardian Email*</label>
                   <input
                     type="email"
+                    placeholder="example@example.com"
                     data-field="guardian_email"
                     className={`formInput ${
                       errors.guardian_email ? "invalid" : ""
@@ -1164,9 +1175,12 @@ export default function AdmissionForm() {
 
                 {/* CNIC */}
                 <div className="formGroup">
-                  <label className="formLabel">Enter Your Guardian CNIC*</label>
+                  <label className="formLabel">
+                    CNIC* <br />Ex- 3520212345671
+                  </label>
                   <input
                     type="text"
+                    placeholder=""
                     data-field="guardian_CNIC"
                     className={`formInput ${
                       errors.guardian_CNIC ? "invalid" : ""
@@ -1187,7 +1201,7 @@ export default function AdmissionForm() {
               <div className="right_align">
                 {/* relationship */}
                 <div className="formGroup">
-                  <label className="formLabel">What is the relation*</label>
+                  <label className="formLabel">Relation with child*</label>
                   <select
                     data-field="relationship"
                     className={`formInput ${
@@ -1214,10 +1228,35 @@ export default function AdmissionForm() {
                   <p className="error">{errors.relationship}</p>
                 )}
 
+                {/* Address */}
+                <div className="formGroup">
+                  <label className="formLabel">
+                    Guardian Address*
+                  </label>
+                  <input
+                    type="text"
+                    data-field="guardian_address"
+                    placeholder="House #, Street #, Area"
+                    className={`formInput ${
+                      errors.guardian_address ? "invalid" : ""
+                    }`}
+                    onChange={(e) => {
+                      clearError("guardian_address");
+                      setGuardian_info({
+                        ...guardian_info,
+                        address: e.target.value.toLowerCase(),
+                      });
+                    }}
+                  />
+                </div>
+                {errors.guardian_address && (
+                  <p className="error">{errors.guardian_address}</p>
+                )}
+
                 {/* Whatsapp */}
                 <div className="formGroup">
                   <label className="formLabel">
-                    Enter Your Guardian Whatsapp Number*
+                    Whatsapp No* <br /> Ex-+92 300XXXXXXX
                   </label>
                   <div style={{ display: "flex", gap: "6px" }}>
                     <select
@@ -1267,30 +1306,6 @@ export default function AdmissionForm() {
                 {errors.guardian_whatsapp && (
                   <p className="error">{errors.guardian_whatsapp}</p>
                 )}
-
-                {/* Address */}
-                <div className="formGroup">
-                  <label className="formLabel">
-                    Enter Your Guardian Address*
-                  </label>
-                  <input
-                    type="text"
-                    data-field="guardian_address"
-                    className={`formInput ${
-                      errors.guardian_address ? "invalid" : ""
-                    }`}
-                    onChange={(e) => {
-                      clearError("guardian_address");
-                      setGuardian_info({
-                        ...guardian_info,
-                        address: e.target.value.toLowerCase(),
-                      });
-                    }}
-                  />
-                </div>
-                {errors.guardian_address && (
-                  <p className="error">{errors.guardian_address}</p>
-                )}
               </div>
             </div>
           </div>
@@ -1301,7 +1316,7 @@ export default function AdmissionForm() {
               className="toggleBox"
               onClick={() => setTogglethird(togglethird === "▾" ? "▸" : "▾")}
             >
-              <h2>Previous Madrassa</h2>
+              <h2>Previous Madrassa (Optional)</h2>
               <h2>{togglethird}</h2>
             </div>
             {togglethird == "▾" && <hr />}
@@ -1310,7 +1325,7 @@ export default function AdmissionForm() {
               <div className="left_align">
                 {/* previous madrassa name */}
                 <div className="formGroup">
-                  <label className="formLabel">Enter Your Previous Name</label>
+                  <label className="formLabel">Previous Name</label>
                   <input
                     type="text"
                     className="formInput"
@@ -1348,7 +1363,7 @@ export default function AdmissionForm() {
               className="toggleBox"
               onClick={() => setTogglefifth(togglefifth === "▾" ? "▸" : "▾")}
             >
-              <h2>Bank Details</h2>
+              <h2>Bank Details (Optional)</h2>
               <h2>{togglefifth}</h2>
             </div>
             {togglefifth == "▾" && <hr />}
@@ -1357,7 +1372,7 @@ export default function AdmissionForm() {
               <div className="left_align">
                 {/* bank name */}
                 <div className="formGroup">
-                  <label className="formLabel">Enter Your Bank Name</label>
+                  <label className="formLabel">Bank Name</label>
                   <input
                     type="text"
                     className="formInput"
