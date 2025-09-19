@@ -509,7 +509,7 @@ export default function AdmissionForm() {
                   <label className="formLabel">First Name*</label>
                   <input
                     type="text"
-                    placeholder="Asad"
+                    placeholder="John"
                     data-field="first_name"
                     className={`formInput ${
                       errors.first_name ? "invalid" : ""
@@ -533,7 +533,7 @@ export default function AdmissionForm() {
                     Father Name*
                   </label>
                   <input
-                    placeholder="akber ali"
+                    placeholder="ali"
                     type="text"
                     data-field="father_name"
                     className={`formInput ${
