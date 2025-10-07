@@ -5,15 +5,15 @@
 }
 
 .backHome {
-  background-color: #887137;
+  background-color: #293c5d;
   color: white;
-  border: 1px solid #887137;
+  border: 1px solid #293c5d;
   padding: 13px;
   position: fixed;
   font-size: 16px;
   border-radius: 17px;
   cursor: pointer;
-  box-shadow: 3px 4px 4px 0px #c8b179;
+  box-shadow: 3px 4px 4px 0px #81858d;
 }
 
 .formDiv {
@@ -94,7 +94,7 @@ form {
 }
 
 .formGroup .formLabel {
-  color: #7a782b;
+  color: #293c5d;
 }
 
 .formGroup .formInput,
@@ -112,11 +112,11 @@ select {
 
 .formGroup .formInput:focus {
   outline: none;
-  border: 2px solid #7a782b;
+  border: 2px solid #293c5d;
 }
 
 .submitBtn {
-  background: #7a782b;
+  background: #293c5d;
   color: white;
   font-weight: 500;
   font-size: 20px;

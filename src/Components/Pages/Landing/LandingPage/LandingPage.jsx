@@ -1,12 +1,14 @@
-import Home from "../Home/Home";
+import HeroSlider from "../HeroSlider/HeroSlider";
 import About from "../About/About";
 import Testimonials from "../Testimonials/Testimonials";
 import Contact from "../Contact/Contact";
+import Footer from "../Footer/Footer";
+
 function LandingPage() {
   return (
     <>
       <div id="home">
-        <Home />
+        <HeroSlider />
       </div>
       <div id="about">
         <About />
@@ -17,15 +19,9 @@ function LandingPage() {
       <div id="contact">
         <Contact />
       </div>
-      <footer
-        style={{
-          textAlign: "center",
-          padding: "10px 0",
-          background: "#f1f1f1",
-        }}
-      >
-        <p>© 2025 KhuddamLearningOnline</p>
-      </footer>
+      <div>
+        <Footer />
+      </div>
     </>
   );
 }

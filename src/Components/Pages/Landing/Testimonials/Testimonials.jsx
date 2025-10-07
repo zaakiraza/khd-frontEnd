@@ -34,7 +34,7 @@ function Testimonials() {
     return () => clearInterval(intervalRef.current);
   }, [current, arr.length]);
 
-  const apiYoutubeKey = "AIzaSyD1VgfCRhpCSgsWz4xHBKR3uoFoOA9Bjcc";
+  const apiYoutubeKey = "AIzaSyBXsN3_orDJjTYHoyX4Xr7Aj10vuBjGBLA";
   const channelHandle = "@khuddamlearningonline";
   const [videos, setVideos] = useState([]);
   const [vidLoading, setVidLoading] = useState(false);

@@ -4,7 +4,7 @@ import NotFound from "./Components/Common/NotFound/NotFound";
 import LandingPage from "./Components/Pages/Landing/LandingPage/LandingPage";
 import LoginStudent from "./Components/Pages/Login/LoginUser";
 import Navbar from "./Components/Common/Navbar/Navbar";
-import StudentDashboard from "./Components/Pages/StudentDashboard.jsx/StudentDashboard";
+import StudentDashboard from "./Components/Pages/StudentDashboard/StudentDashboard";
 import VerifyOtp from "./Components/Pages/VerifyOtp/VerifyOtp";
 import PrivateRoute from "./Components/Routes/PrivateRoutes";
 import { useLocation } from "react-router-dom";

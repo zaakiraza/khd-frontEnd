@@ -457,7 +457,7 @@ export default function AdmissionForm() {
                     position: "absolute",
                     bottom: 4,
                     right: 4,
-                    background: "#887137",
+                    background: "#293c5d",
                     color: "#fff",
                     padding: "6px 10px",
                     borderRadius: 20,
@@ -1176,7 +1176,8 @@ export default function AdmissionForm() {
                 {/* CNIC */}
                 <div className="formGroup">
                   <label className="formLabel">
-                    CNIC* <br />Ex- 3520212345671
+                    CNIC* <br />
+                    Ex- 3520212345671
                   </label>
                   <input
                     type="text"
@@ -1230,9 +1231,7 @@ export default function AdmissionForm() {
 
                 {/* Address */}
                 <div className="formGroup">
-                  <label className="formLabel">
-                    Guardian Address*
-                  </label>
+                  <label className="formLabel">Guardian Address*</label>
                   <input
                     type="text"
                     data-field="guardian_address"

@@ -9,7 +9,7 @@
   border-radius: 10px;
   padding: 25px 0px;
   width: 350px;
-  border: 2px solid #7a782b;
+  border: 2px solid #293c5d;
   text-align: center;
 }
 
@@ -40,11 +40,11 @@ input {
   outline: none;
   border: 1px solid white;
   border-radius: 5px;
-  border: 2px solid #7a782b;
+  border: 2px solid #293c5d;
 }
 
 input:focus {
-  border: 1px solid #7a782b;
+  border: 1px solid #293c5d;
 }
 
 .btnLogin {
@@ -54,15 +54,15 @@ input:focus {
   border: 1px solid white;
   border-radius: 5px;
   cursor: pointer;
-  background-color: #7a782b;
+  background-color: #293c5d;
   color: white;
   margin-top: 15px;
 }
 
 .btnLogin:hover {
   background-color: white;
-  color: #7a782b;
-  border: 1px solid #7a782b;
+  color: #293c5d;
+  border: 1px solid #293c5d;
 }
 
 .form_box p {
@@ -74,7 +74,7 @@ input:focus {
 }
 
 .lst_anker {
-  color: #7a782b;
+  color: #293c5d;
   text-decoration: underline;
   text-align: center;
   display: inline-block;
