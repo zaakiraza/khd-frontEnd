@@ -17,15 +17,15 @@
 .about h1,
 .learn h1 {
   font-size: 45px;
-  color: #6a6944;
+  color: #293c5d;
 }
 
 .about hr,
 .learn hr {
   height: 2px;
   width: 18%;
-  border: 1px solid #7a782b;
-  background-color: #7a782b;
+  border: 1px solid #293c5d;
+  background-color: #293c5d;
 }
 
 .text {
@@ -36,7 +36,7 @@
 }
 
 span {
-  color: #6a6944;
+  color: #293c5d;
   font-weight: 700;
 }
 

@@ -84,12 +84,12 @@
 .slide-divider {
   width: 36%;
   height: 4px;
-  background: linear-gradient(90deg, #7a782b 0%, #a8a532 100%);
+  background: linear-gradient(90deg, #293c5d 0%, #4a5f8f 100%);
   border: none;
   border-radius: 2px;
   margin-bottom: 2rem;
   animation: expandWidth 1s ease-out 0.4s both;
-  box-shadow: 0 2px 8px rgba(122, 120, 43, 0.3);
+  box-shadow: 0 2px 8px rgba(41, 60, 93, 0.3);
 }
 
 @keyframes expandWidth {
@@ -123,7 +123,7 @@
   content: "▶";
   position: absolute;
   left: 0;
-  color: #7a782b;
+  color: #293c5d;
   font-size: 0.9rem;
   animation: pulse 2s infinite;
 }
@@ -139,7 +139,7 @@
 }
 
 .slide-button {
-  background: linear-gradient(135deg, #7a782b 0%, #a8a532 100%);
+  background: linear-gradient(135deg, #293c5d 0%, #4a5f8f 100%);
   color: white;
   border: 2px solid transparent;
   padding: 1rem 2rem;
@@ -150,7 +150,7 @@
   transition: all 0.3s ease;
   text-transform: uppercase;
   letter-spacing: 1px;
-  box-shadow: 0 4px 15px rgba(122, 120, 43, 0.3);
+  box-shadow: 0 4px 15px rgba(41, 60, 93, 0.3);
   animation: fadeInUp 1s ease-out 0.8s both;
   position: relative;
   overflow: hidden;
@@ -177,9 +177,9 @@
 }
 
 .slide-button:hover {
-  background: linear-gradient(135deg, #a8a532 0%, #7a782b 100%);
+  background: linear-gradient(135deg, #4a5f8f 0%, #293c5d 100%);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(122, 120, 43, 0.4);
+  box-shadow: 0 6px 20px rgba(41, 60, 93, 0.4);
   border-color: rgba(255, 255, 255, 0.3);
 }
 
@@ -219,8 +219,8 @@
 }
 
 .nav-button:hover {
-  background: rgba(122, 120, 43, 0.8);
-  border-color: #7a782b;
+  background: rgba(41, 60, 93, 0.8);
+  border-color: #293c5d;
   transform: scale(1.1);
 }
 
@@ -253,13 +253,13 @@
 }
 
 .indicator.active {
-  background: #7a782b;
-  border-color: #7a782b;
+  background: #293c5d;
+  border-color: #293c5d;
   transform: scale(1.2);
 }
 
 .indicator:hover {
-  border-color: #7a782b;
+  border-color: #293c5d;
   transform: scale(1.1);
 }
 
@@ -271,7 +271,7 @@
   transform: translate(-50%, -50%);
   width: 0;
   height: 0;
-  background: #7a782b;
+  background: #293c5d;
   border-radius: 50%;
   transition: all 0.3s ease;
 }

@@ -1,5 +1,5 @@
 .footer {
-  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  background: linear-gradient(135deg, #293c5d 0%, #1e2a47 100%);
   color: #ffffff;
   padding: 3rem 0 0;
   margin-top: auto;
@@ -35,18 +35,18 @@
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 0 4px 4px 0;
-  background: #3498db;
+  background: #293c5d;
   color: white;
   font-size: 1rem;
   cursor: pointer;
 }
 
 .footer-section form button:hover {
-  background: #2980b9;
+  background: #4a5f8f;
 }
 
 .footer-section h4 {
-  color: #3498db;
+  color: #4a5f8f;
   font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 1rem;
@@ -71,7 +71,7 @@
 .logo-text {
   font-size: 1.8rem;
   font-weight: bold;
-  color: #3498db;
+  color: #4a5f8f;
   margin: 0;
 }
 
@@ -106,13 +106,13 @@
   content: "▶";
   position: absolute;
   left: 0;
-  color: #3498db;
+  color: #4a5f8f;
   font-size: 0.7rem;
   transition: all 0.3s ease;
 }
 
 .footer-links a:hover {
-  color: #3498db;
+  color: #4a5f8f;
   padding-left: 1.25rem;
 }
 
@@ -153,10 +153,10 @@
   justify-content: center;
   width: 40px;
   height: 40px;
-  background: rgba(52, 152, 219, 0.1);
-  border: 2px solid rgba(52, 152, 219, 0.3);
+  background: rgba(41, 60, 93, 0.2);
+  border: 2px solid rgba(74, 95, 143, 0.4);
   border-radius: 50%;
-  color: #3498db;
+  color: #4a5f8f;
   text-decoration: none;
   font-size: 1.2rem;
   transition: all 0.3s ease;
@@ -167,10 +167,10 @@
 }
 
 .social-link:hover {
-  background: #3498db;
+  background: #4a5f8f;
   color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+  box-shadow: 0 4px 12px rgba(41, 60, 93, 0.4);
 }
 
 /* Footer Bottom */

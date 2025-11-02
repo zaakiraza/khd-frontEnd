@@ -11,7 +11,7 @@
 .testi h1,
 .recent h1 {
   font-size: 45px;
-  color: #a48a2c;
+  color: #293c5d;
   font-weight: bold;
   text-align: center;
 }
@@ -21,7 +21,7 @@
   height: 2px;
   width: 40%;
   border: none;
-  border-top: 3px solid #a48a2c;
+  border-top: 3px solid #293c5d;
   margin: 0 auto 16px auto;
   background-color: transparent;
 }
@@ -67,7 +67,7 @@
 
 .quote-name {
   font-size: 1.1rem;
-  color: #a48a2c;
+  color: #293c5d;
   font-weight: bold;
   margin-top: 8px;
 }
@@ -89,7 +89,7 @@
   z-index: 1;
 }
 .arrow:hover {
-  background: #e4b020;
+  background: #4a5f8f;
   color: #fff;
 }
 .arrow.left {
@@ -116,7 +116,7 @@
   transition: background 0.2s;
 }
 .dot.active {
-  background: #a48a2c;
+  background: #293c5d;
 }
 
 /* Recent Lectures Videos Grid */

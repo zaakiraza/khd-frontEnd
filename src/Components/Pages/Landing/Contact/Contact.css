@@ -6,7 +6,7 @@
 
 .contact h1 {
   font-size: 45px;
-  color: #a48a2c;
+  color: #293c5d;
   font-weight: bold;
   text-align: center;
   padding-bottom: 22px;
@@ -16,7 +16,7 @@
   height: 2px;
   width: 40%;
   border: none;
-  border-top: 3px solid #a48a2c;
+  border-top: 3px solid #293c5d;
   margin: 0 auto 16px auto;
   background-color: transparent;
 }
@@ -37,7 +37,7 @@
 }
 
 .contact-info p a {
-  color: #a48a2c;
+  color: #293c5d;
 }
 
 .contact-info p a:hover {

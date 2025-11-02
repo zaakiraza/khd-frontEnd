@@ -21,6 +21,7 @@ a {
   width: 100%;
   background: transparent;
   font-family: "poppins";
+  z-index: 1000;
 }
 
 .Navbar::before {
@@ -65,14 +66,14 @@ a {
 
 .navItems li:hover a,
 .navItems li:focus-within a {
-  color: #d3c900;
+  color: #4a5f8f;
   text-decoration: underline;
-  text-decoration-color: #d3c900;
+  text-decoration-color: #4a5f8f;
   text-underline-offset: 4px;
 }
 
 .navItems li button:hover {
-  background-color: #7a782b;
+  background-color: #4a5f8f;
   border: 1px solid white;
   /* color: black; */
 }
