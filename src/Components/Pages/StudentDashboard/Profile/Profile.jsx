@@ -1,139 +1,363 @@
-import React from "react";
+import React, { useState } from "react";
+import { useToast } from "../../../Common/Toast/ToastContext";
+import { useNavigate } from "react-router-dom";
 import "./Profile.css";
 
 const Profile = ({ userDetails }) => {
-  const styles = {
-    card: {
-      background: "#fff",
-      border: "1px solid #eee",
-      borderRadius: 8,
-      padding: 16,
-      boxShadow: "0 1px 2px rgba(0,0,0,0.04)",
-    },
-    sectionHeader: {
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      marginBottom: 12,
-    },
-    h2: { fontSize: 18, margin: 0 },
-    avatarRow: { display: "flex", gap: 12, alignItems: "center" },
-    avatar: {
-      width: 72,
-      height: 72,
-      borderRadius: "50%",
-      objectFit: "cover",
-      border: "1px solid #eee",
-    },
-    small: { fontSize: 12, color: "#666" },
-    tag: {
-      padding: "2px 8px",
-      background: "#f1f5f9",
-      borderRadius: 999,
-      fontSize: 12,
-      border: "1px solid #e2e8f0",
-    },
+  const toast = useToast();
+  const navigate = useNavigate();
+  const [openSections, setOpenSections] = useState({
+    personal: false,
+    academic: false,
+    guardian: false,
+    previous: false,
+    bank: false,
+  });
+
+  const personal = userDetails?.personal_info || {};
+  const guardian = userDetails?.guardian_info || {};
+  const academic = userDetails?.academic_progress || {};
+  const previous = userDetails?.previous_madrassa || {};
+  const bank = userDetails?.bank_info || {};
+
+  const fullName =
+    `${personal.first_name || ""} ${personal.last_name || ""}`.trim() ||
+    "Student";
+  const profileImg = personal.img_URL || "/logo.png";
+
+  const formatDate = (dateStr) => {
+    if (!dateStr) return "-";
+    const date = new Date(dateStr);
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
   };
 
-  const safeName = (u) => {
-    const pi = u?.personal_info || {};
-    const fn = pi.first_name || "";
-    const ln = pi.last_name || "";
-    return `${fn} ${ln}`.trim() || "Student";
+  const getStatusBadge = (status) => {
+    const statusClass =
+      status === "active" ? "status-active" : "status-inactive";
+    return (
+      <span className={`status-badge ${statusClass}`}>
+        {status || "pending"}
+      </span>
+    );
   };
 
-  const safeImg = (u) => u?.personal_info?.img_URL || "/logo.png";
+  const getVerifiedBadge = (verified) => {
+    return verified ? (
+      <span className="verified-badge">
+        <i className="fas fa-check-circle"></i> Verified
+      </span>
+    ) : (
+      <span className="unverified-badge">
+        <i className="fas fa-exclamation-triangle"></i> Unverified
+      </span>
+    );
+  };
+
+  const toggleSection = (section) => {
+    setOpenSections((prev) => ({
+      ...prev,
+      [section]: !prev[section],
+    }));
+  };
+
+  const handleLogout = () => {
+    // Simple logout without confirmation
+    localStorage.removeItem("token");
+    toast.showSuccess("Logged out successfully!", 1500);
+    setTimeout(() => {
+      navigate("/login-student");
+    }, 1000);
+  };
 
   return (
-    <div style={{ ...styles.card }}>
-      <div style={styles.sectionHeader}>
-        <h2 style={styles.h2}>Profile</h2>
-      </div>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 16 }}>
-        <div>
-          <div style={styles.avatarRow}>
-            <img
-              src={safeImg(userDetails)}
-              alt="avatar"
-              style={styles.avatar}
-            />
-            <div>
-              <div style={{ fontSize: 18, fontWeight: 600 }}>
-                {safeName(userDetails)}
-              </div>
-              <div style={styles.small}>
-                Roll No: {userDetails?.personal_info?.rollNo ?? "-"}
-              </div>
-              <div style={styles.small}>
-                Status:{" "}
-                <span style={styles.tag}>
-                  {userDetails?.personal_info?.status ?? "active"}
-                </span>
-              </div>
-            </div>
-          </div>
-          <div
-            style={{
-              marginTop: 12,
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: 8,
+    <div className="profile-container">
+      {/* Header Section */}
+      <div className="profile-header-section">
+        <div className="profile-avatar-container">
+          <img
+            src={profileImg}
+            alt={fullName}
+            className="profile-avatar-large"
+            onError={(e) => {
+              e.target.src = "/logo.png";
             }}
+          />
+          {getVerifiedBadge(personal.verified)}
+        </div>
+        <div className="profile-header-info">
+          <h1 className="profile-name">{fullName}</h1>
+          <div className="profile-meta">
+            <span className="meta-item">
+              <i className="fas fa-id-card"></i> <strong>Roll No:</strong>{" "}
+              {personal.rollNo || "-"}
+            </span>
+            <span className="meta-divider">•</span>
+            <span className="meta-item">{getStatusBadge(personal.status)}</span>
+            <span className="meta-divider">•</span>
+            <span className="meta-item">
+              <i className="fas fa-calendar-alt"></i> <strong>Enrolled:</strong>{" "}
+              {personal.enrolled_year || "-"}
+            </span>
+          </div>
+          <div className="profile-contact-quick">
+            <span>
+              <i className="fas fa-envelope"></i> {personal.email || "-"}
+            </span>
+            <span>
+              <i className="fab fa-whatsapp"></i> {personal.whatsapp_no || "-"}
+            </span>
+          </div>
+        </div>
+        <button className="logout-btn" onClick={handleLogout}>
+          <i className="fas fa-sign-out-alt"></i> Logout
+        </button>
+      </div>
+
+      {/* Accordion Sections */}
+      <div className="accordion-container">
+        {/* Personal Information Accordion */}
+        <div className="accordion-item">
+          <button
+            className="accordion-header"
+            onClick={() => toggleSection("personal")}
           >
-            <Info
-              label="Phone"
-              value={userDetails?.personal_info?.whatsapp_no}
-            />
-            <Info
-              label="Alt. Phone"
-              value={userDetails?.personal_info?.alternative_no || "-"}
-            />
-            <Info label="Gender" value={userDetails?.personal_info?.gender} />
-            <Info label="Age" value={userDetails?.personal_info?.age} />
-            <Info label="City" value={userDetails?.personal_info?.city} />
-            <Info label="Country" value={userDetails?.personal_info?.country} />
-            <Info
-              label="Address"
-              value={userDetails?.personal_info?.address}
-              full
-            />
+            <span className="accordion-title">
+              <i className="fas fa-user"></i> Personal Information
+            </span>
+            <i
+              className={`fas fa-chevron-${
+                openSections.personal ? "up" : "down"
+              } accordion-icon`}
+            ></i>
+          </button>
+          <div
+            className={`accordion-content ${
+              openSections.personal ? "open" : ""
+            }`}
+          >
+            <div className="accordion-body">
+              <div className="info-row">
+                <InfoField label="First Name" value={personal.first_name} />
+                <InfoField label="Last Name" value={personal.last_name} />
+              </div>
+              <div className="info-row">
+                <InfoField label="Father's Name" value={personal.father_name} />
+                <InfoField label="Gender" value={personal.gender} />
+              </div>
+              <div className="info-row">
+                <InfoField
+                  label="Date of Birth"
+                  value={formatDate(personal.dob)}
+                />
+                <InfoField label="Age" value={`${personal.age} years`} />
+              </div>
+              <div className="info-row">
+                <InfoField label="CNIC" value={personal.CNIC} />
+                <InfoField
+                  label="Marj-e-Taqleed"
+                  value={personal.marj_e_taqleed}
+                />
+              </div>
+              <div className="info-row">
+                <InfoField label="WhatsApp" value={personal.whatsapp_no} />
+                <InfoField
+                  label="Alternative Phone"
+                  value={personal.alternative_no}
+                />
+              </div>
+              <div className="info-row">
+                <InfoField label="Email" value={personal.email} fullWidth />
+              </div>
+              <div className="info-row">
+                <InfoField label="Address" value={personal.address} fullWidth />
+              </div>
+              <div className="info-row">
+                <InfoField label="City" value={personal.city} />
+                <InfoField label="Country" value={personal.country} />
+              </div>
+              {personal.doc_img && (
+                <div className="info-row">
+                  <div className="document-preview">
+                    <label className="info-label">Document</label>
+                    <a
+                      href={personal.doc_img}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="doc-link"
+                    >
+                      <i className="fas fa-file-alt"></i> View Document
+                    </a>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
-        <div>
-          <div style={{ marginBottom: 8, fontWeight: 600 }}>
-            Academic Progress
-          </div>
-          <div
-            style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}
+        {/* Academic Progress Accordion */}
+        <div className="accordion-item">
+          <button
+            className="accordion-header"
+            onClick={() => toggleSection("academic")}
           >
-            <Info
-              label="Class"
-              value={userDetails?.academic_progress?.academic_class}
-            />
-            <Info
-              label="Institute"
-              value={userDetails?.academic_progress?.institute_name}
-            />
-            <Info
-              label="Result"
-              value={userDetails?.academic_progress?.result || "-"}
-            />
-          </div>
-          <div style={{ marginTop: 12, fontWeight: 600 }}>Guardian</div>
+            <span className="accordion-title">
+              <i className="fas fa-graduation-cap"></i> Academic Progress
+            </span>
+            <i
+              className={`fas fa-chevron-${
+                openSections.academic ? "up" : "down"
+              } accordion-icon`}
+            ></i>
+          </button>
           <div
-            style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}
+            className={`accordion-content ${
+              openSections.academic ? "open" : ""
+            }`}
           >
-            <Info label="Name" value={userDetails?.guardian_info?.name} />
-            <Info
-              label="Relationship"
-              value={userDetails?.guardian_info?.relationship}
-            />
-            <Info
-              label="Contact"
-              value={userDetails?.guardian_info?.whatsapp_no}
-            />
-            <Info label="CNIC" value={userDetails?.guardian_info?.CNIC} />
+            <div className="accordion-body">
+              <div className="info-row">
+                <InfoField
+                  label="Current Class"
+                  value={academic.academic_class}
+                />
+                <InfoField label="Institute" value={academic.institute_name} />
+              </div>
+              <div className="info-row">
+                <InfoField
+                  label="Result"
+                  value={academic.result || "Not Available"}
+                />
+                <InfoField
+                  label="Status"
+                  value={academic.inProgress ? "In Progress" : "Completed"}
+                />
+              </div>
+              <div className="info-row">
+                <InfoField
+                  label="Enrolled Class"
+                  value={personal.enrolled_class || "Not Assigned"}
+                />
+                <InfoField
+                  label="Application Status"
+                  value={personal.application_status}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Guardian Information Accordion */}
+        <div className="accordion-item">
+          <button
+            className="accordion-header"
+            onClick={() => toggleSection("guardian")}
+          >
+            <span className="accordion-title">
+              <i className="fas fa-users"></i> Guardian Info
+            </span>
+            <i
+              className={`fas fa-chevron-${
+                openSections.guardian ? "up" : "down"
+              } accordion-icon`}
+            ></i>
+          </button>
+          <div
+            className={`accordion-content ${
+              openSections.guardian ? "open" : ""
+            }`}
+          >
+            <div className="accordion-body">
+              <div className="info-row">
+                <InfoField label="Name" value={guardian.name} />
+                <InfoField label="Relationship" value={guardian.relationship} />
+              </div>
+              <div className="info-row">
+                <InfoField label="WhatsApp" value={guardian.whatsapp_no} />
+                <InfoField label="CNIC" value={guardian.CNIC} />
+              </div>
+              <div className="info-row">
+                <InfoField label="Email" value={guardian.email} fullWidth />
+              </div>
+              <div className="info-row">
+                <InfoField label="Address" value={guardian.address} fullWidth />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Previous Madrassa Accordion */}
+        <div className="accordion-item">
+          <button
+            className="accordion-header"
+            onClick={() => toggleSection("previous")}
+          >
+            <span className="accordion-title">
+              <i className="fas fa-mosque"></i> Previous Madrassa (Optional)
+            </span>
+            <i
+              className={`fas fa-chevron-${
+                openSections.previous ? "up" : "down"
+              } accordion-icon`}
+            ></i>
+          </button>
+          <div
+            className={`accordion-content ${
+              openSections.previous ? "open" : ""
+            }`}
+          >
+            <div className="accordion-body">
+              <div className="info-row">
+                <InfoField
+                  label="Madrassa Name"
+                  value={previous.name || "None"}
+                />
+                <InfoField
+                  label="Topic Studied"
+                  value={previous.topic || "None"}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bank Details Accordion */}
+        <div className="accordion-item">
+          <button
+            className="accordion-header"
+            onClick={() => toggleSection("bank")}
+          >
+            <span className="accordion-title">
+              <i className="fas fa-university"></i> Bank Details (Optional)
+            </span>
+            <i
+              className={`fas fa-chevron-${
+                openSections.bank ? "up" : "down"
+              } accordion-icon`}
+            ></i>
+          </button>
+          <div
+            className={`accordion-content ${openSections.bank ? "open" : ""}`}
+          >
+            <div className="accordion-body">
+              <div className="info-row">
+                <InfoField label="Bank Name" value={bank.bank_name || "None"} />
+                <InfoField
+                  label="Account Number"
+                  value={bank.account_number || "None"}
+                />
+              </div>
+              <div className="info-row">
+                <InfoField
+                  label="Account Title"
+                  value={bank.account_title || "None"}
+                />
+                <InfoField label="Branch" value={bank.branch || "None"} />
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -141,22 +365,13 @@ const Profile = ({ userDetails }) => {
   );
 };
 
-function Info({ label, value, full }) {
-  const styles = {
-    wrap: {
-      display: full ? "block" : "grid",
-      gridTemplateColumns: full ? undefined : "1fr",
-      gap: 2,
-    },
-    label: { color: "#666", fontSize: 12 },
-    value: { fontSize: 14 },
-  };
+const InfoField = ({ label, value, fullWidth }) => {
   return (
-    <div style={styles.wrap}>
-      <div style={styles.label}>{label}</div>
-      <div style={styles.value}>{value ?? "-"}</div>
+    <div className={`info-field ${fullWidth ? "full-width" : ""}`}>
+      <label className="info-label">{label}</label>
+      <div className="info-value">{value || "-"}</div>
     </div>
   );
-}
+};
 
 export default Profile;

@@ -7,6 +7,7 @@ import Navbar from "./Components/Common/Navbar/Navbar";
 import StudentDashboard from "./Components/Pages/StudentDashboard/StudentDashboard";
 import VerifyOtp from "./Components/Pages/VerifyOtp/VerifyOtp";
 import PrivateRoute from "./Components/Routes/PrivateRoutes";
+import { ToastProvider } from "./Components/Common/Toast/ToastContext";
 import { useLocation } from "react-router-dom";
 import "./index.css";
 
@@ -15,7 +16,7 @@ function App() {
   const navbarVisibleRoutes = ["/", "/home"];
   const showNavbar = navbarVisibleRoutes.includes(location.pathname);
   return (
-    <>
+    <ToastProvider>
       {showNavbar && <Navbar />}
 
       <Routes>
@@ -36,7 +37,7 @@ function App() {
         {/* Not Found Route */}
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </>
+    </ToastProvider>
   );
 }
 

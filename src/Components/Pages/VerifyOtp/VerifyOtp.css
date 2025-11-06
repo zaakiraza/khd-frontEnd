@@ -32,17 +32,21 @@
   width: 56px;
   height: 56px;
   font-size: 24px;
+  font-weight: 600;
   text-align: center;
-  border: 1px solid var(--input-border);
+  border: 2px solid var(--input-border);
   border-radius: 6px;
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  color: #333;
+  background-color: #fff;
+  caret-color: var(--brand);
 }
 
-.otp-input:focus {
+/* .otp-input:focus {
   border-color: var(--brand);
   box-shadow: 0 0 0 6px rgba(122, 119, 43, 0.09);
   outline: none;
-}
+} */
 
 .actions {
   display: flex;

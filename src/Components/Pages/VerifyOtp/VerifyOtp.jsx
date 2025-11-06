@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useToast } from "../../Common/Toast/ToastContext";
 import "./VerifyOtp.css";
 
 function VerifyOtp() {
+  const toast = useToast();
   const BASEURL = import.meta.env.VITE_BASEURL;
   const [values, setValues] = useState(["", "", "", ""]);
   const inputsRef = useRef([]);
@@ -20,7 +22,7 @@ function VerifyOtp() {
     const isVerified = await axios.get(`${BASEURL}/users/single`, {
       headers: { Authorization: `Bearer ${token}` },
     });
-    if(isVerified.data.data.personal_info.verified){
+    if (isVerified.data.data.personal_info.verified) {
       navigate("/UserDashboard");
     }
   };
@@ -72,11 +74,13 @@ function VerifyOtp() {
 
   const handleChange = (index, e) => {
     const val = e.target.value.replace(/[^0-9]/g, "");
+    
     if (!val) {
       updateValueAt(index, "");
       return;
     }
 
+    // Handle pasted content
     if (val.length > 1) {
       const newVals = [...values];
       for (let i = 0; i < val.length && index + i < 4; i++) {
@@ -88,8 +92,11 @@ function VerifyOtp() {
       return;
     }
 
+    // Single digit input
     updateValueAt(index, val);
-    if (val && index < 3) inputsRef.current[index + 1]?.focus();
+    if (index < 3) {
+      inputsRef.current[index + 1]?.focus();
+    }
   };
 
   const updateValueAt = (index, val) => {
@@ -120,9 +127,18 @@ function VerifyOtp() {
     setMessage(null);
     setError(null);
     const otp = values.join("");
-    if (!otp || otp.length < 4)
-      return setError("Please enter the 4-digit OTP.");
-    if (!token) return setError("Missing authentication token.");
+    if (!otp || otp.length < 4) {
+      const errorMsg = "Please enter the 4-digit OTP.";
+      setError(errorMsg);
+      toast.showWarning(errorMsg);
+      return;
+    }
+    if (!token) {
+      const errorMsg = "Missing authentication token.";
+      setError(errorMsg);
+      toast.showError(errorMsg);
+      return;
+    }
 
     setLoading(true);
     try {
@@ -131,12 +147,17 @@ function VerifyOtp() {
         { otp },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      setMessage(res.data?.message || "OTP verified successfully.");
-      navigate("/home");
+      const successMsg = res.data?.message || "OTP verified successfully.";
+      setMessage(successMsg);
+      toast.showSuccess(successMsg);
+      setTimeout(() => {
+        navigate("/home");
+      }, 1000);
     } catch (err) {
       const msg =
         err?.response?.data?.message || err.message || "Network error";
       setError(msg);
+      toast.showError(msg);
     } finally {
       setLoading(false);
     }
@@ -145,14 +166,23 @@ function VerifyOtp() {
   const handleResend = async () => {
     setMessage(null);
     setError(null);
-    if (!token) return setError("Missing authentication token.");
+    if (!token) {
+      const errorMsg = "Missing authentication token.";
+      setError(errorMsg);
+      toast.showError(errorMsg);
+      return;
+    }
 
     setResending(true);
     try {
-      const res = await axios.post(`${BASEURL}/auth/resendOtp`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setMessage(res.data?.message || "OTP resent. Check your email.");
+      const res = await axios.post(
+        `${BASEURL}/auth/resendOtp`,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      const successMsg = res.data?.message || "OTP resent. Check your email.";
+      setMessage(successMsg);
+      toast.showSuccess(successMsg);
       setValues(["", "", "", ""]);
       setSecondsLeft(60);
       clearInterval(timerRef.current);
@@ -164,6 +194,7 @@ function VerifyOtp() {
       const msg =
         err?.response?.data?.message || err.message || "Network error";
       setError(msg);
+      toast.showError(msg);
     } finally {
       setResending(false);
     }

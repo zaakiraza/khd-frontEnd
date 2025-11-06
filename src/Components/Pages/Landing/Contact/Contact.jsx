@@ -26,8 +26,8 @@ function Contact() {
             >
               <i className="fa-brands fa-facebook"></i>
             </a>
-            <a>
-              <i className="fa-brands fa-x-twitter"></i>
+            <a href="mailto:info@khuddam.edu" style={{color:"#293c5d"}}>
+              <i className="fa-solid fa-envelope"></i>
             </a>
             <a
               href="https://www.youtube.com/@khuddamlearningonline"

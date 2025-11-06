@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
+import { useToast } from "../../Common/Toast/ToastContext";
 import Sidebar from "./Sidebar/Sidebar";
 import Profile from "./Profile/Profile";
 import Courses from "./Courses/Courses";
@@ -8,6 +9,7 @@ import Quizzes from "./Quizzes/Quizzes";
 import UpdateProfile from "./UpdateProfile/UpdateProfile";
 
 function StudentDashboard() {
+  const toast = useToast();
   const BASEURL = import.meta.env.VITE_BASEURL;
   const token = localStorage.getItem("token");
 
@@ -33,10 +35,11 @@ function StudentDashboard() {
       const data = res?.data?.data || null;
       setUserDetails(data);
       setForm(buildInitialForm(data));
+      toast.showSuccess("Profile loaded successfully!");
     } catch (e) {
-      setError(
-        e?.response?.data?.message || e?.message || "Failed to load profile"
-      );
+      const errorMsg = e?.response?.data?.message || e?.message || "Failed to load profile";
+      setError(errorMsg);
+      toast.showError(errorMsg);
     } finally {
       setLoading(false);
     }
@@ -148,10 +151,11 @@ function StudentDashboard() {
         bank_info: updated?.bank_info || userDetails?.bank_info,
       };
       setUserDetails(merged);
+      toast.showSuccess("Profile updated successfully!");
     } catch (e) {
-      setError(
-        e?.response?.data?.message || e?.message || "Failed to save profile"
-      );
+      const errorMsg = e?.response?.data?.message || e?.message || "Failed to save profile";
+      setError(errorMsg);
+      toast.showError(errorMsg);
     } finally {
       setSaving(false);
     }

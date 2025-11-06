@@ -60,9 +60,6 @@ const Footer = () => {
               <li>
                 <Link to="/new-admission/form">Register</Link>
               </li>
-              <li>
-                <Link to="/login-student">Login</Link>
-              </li>
             </ul>
           </div>
 
@@ -71,10 +68,10 @@ const Footer = () => {
             <h4>Services</h4>
             <ul className="footer-links">
               <li>
-                <a href="/UserDashboard">Student Portal</a>
+                <Link to="/UserDashboard">Student Portal</Link>
               </li>
               <li>
-                <a href="/new-admission/form">Online Forms</a>
+                <Link to="/new-admission/form">Online Forms</Link>
               </li>
             </ul>
           </div>
@@ -85,32 +82,48 @@ const Footer = () => {
             <div className="contact-info">
               <div className="contact-item">
                 <i className="fa-brands fa-whatsapp"></i>
-                <p>+92-300-2504457</p>
+                <a href="tel:+923002504457">
+                  <strong> +92-300-2504457</strong>
+                </a>
               </div>
               <div className="contact-item">
                 <i className="fa-brands fa-whatsapp"></i>
-                <p>+92-322-2116921</p>
+                <a href="tel:+923222116921">
+                  <strong>+92-322-2116921</strong>
+                </a>
               </div>
               <div className="contact-item">
                 <i className="fa-solid fa-envelope"></i>
-                <p>info@khuddam.edu</p>
+                <a href="mailto:info@khuddam.edu">
+                  <strong>info@khuddam.edu</strong>
+                </a>
               </div>
               <div className="contact-item">
                 <i className="fa-solid fa-earth-americas"></i>
-                <p>www.khuddam.edu</p>
+                <a href="http://www.khuddam.edu">
+                  <strong>www.khuddam.edu</strong>
+                </a>
               </div>
             </div>
 
             {/* Social Media Links */}
             <div className="social-links">
-              <a href="#" className="social-link youtube">
-                <i className="fa-brands fa-youtube"></i>
-              </a>
-              <a href="#" className="social-link facebook">
+              <a
+                href="https://www.facebook.com/khuddamonline?mibextid=ZbWKwL"
+                className="social-link facebook"
+                target="_blank"
+              >
                 <i className="fa-brands fa-facebook"></i>
               </a>
-              <a href="#" className="social-link mail">
+              <a href="mailto:info@khuddam.edu" className="social-link mail">
                 <i className="fa-solid fa-envelope"></i>
+              </a>
+              <a
+                href="https://www.youtube.com/@khuddamlearningonline"
+                className="social-link youtube"
+                target="_blank"
+              >
+                <i className="fa-brands fa-youtube"></i>
               </a>
             </div>
           </div>

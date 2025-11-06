@@ -47,7 +47,7 @@
 
 .footer-section h4 {
   color: #4a5f8f;
-  font-size: 1.2rem;
+  font-size: 26px;
   font-weight: 600;
   margin-bottom: 1rem;
   text-transform: uppercase;
@@ -100,6 +100,7 @@
   transition: all 0.3s ease;
   position: relative;
   padding-left: 1rem;
+  letter-spacing: 1px;
 }
 
 .footer-links a:before {
@@ -134,10 +135,11 @@
   gap: 10px;
 }
 
-.contact-item p {
+.contact-item a {
   font-size: 18px;
   color: white;
   margin: 0;
+  letter-spacing: 1px;
 }
 
 /* Social Media Links */

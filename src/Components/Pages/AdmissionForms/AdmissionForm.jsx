@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import "./AdmissionForm.css";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { useToast } from "../../Common/Toast/ToastContext";
 
 export default function AdmissionForm() {
+  const toast = useToast();
   const BASEURL = import.meta.env.VITE_BASEURL;
   const CLOUD_NAME = (
     import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || ""
@@ -345,13 +347,15 @@ export default function AdmissionForm() {
       // console.log("Submitting payload:", payload);
       const api = await axios.post(`${BASEURL}/auth/signup`, payload);
       if (api?.data?.status) {
-        alert("User successfully registered!");
+        toast.showSuccess("User successfully registered!");
         localStorage.setItem("token", api.data.data.token);
-        navigate("/verify-otp");
+        setTimeout(() => {
+          navigate("/verify-otp");
+        }, 1000);
       }
     } catch (err) {
       // console.log(err);
-      alert(err.response?.data.message || "Upload failed");
+      toast.showError(err.response?.data.message || "Upload failed");
     } finally {
       setIsSubmitting(false);
     }
@@ -360,9 +364,9 @@ export default function AdmissionForm() {
   const numberArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   return (
     <>
-      <a href="/" className="backHome">
+      <Link to="/" className="backHome">
         Back To Home
-      </a>
+      </Link>
       {/* <Link to={"/home"} className="backHome">
         Back To Home
       </Link> */}
@@ -614,6 +618,7 @@ export default function AdmissionForm() {
                         errors.whatsapp_no ? "invalid" : ""
                       }`}
                       placeholder="XXXXXXXXXX"
+                      // maxLength={10}
                       onChange={(e) => {
                         const digits = e.target.value.replace(/[^0-9]/g, "");
                         clearError("whatsapp_no");
