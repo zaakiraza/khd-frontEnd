@@ -34,31 +34,61 @@ const Sidebar = ({ activeTab, setActiveTab, THEME }) => {
         style={styles.navItem(activeTab === "profile")}
         onClick={() => setActiveTab("profile")}
       >
-        Profile
+        <i className="fas fa-user"></i> Profile
+      </button>
+      <button
+        style={styles.navItem(activeTab === "announcements")}
+        onClick={() => setActiveTab("announcements")}
+      >
+        <i className="fas fa-bullhorn"></i> Announcements
       </button>
       <button
         style={styles.navItem(activeTab === "courses")}
         onClick={() => setActiveTab("courses")}
       >
-        Courses
+        <i className="fas fa-book"></i> Courses
+      </button>
+      <button
+        style={styles.navItem(activeTab === "assignments")}
+        onClick={() => setActiveTab("assignments")}
+      >
+        <i className="fas fa-tasks"></i> Assignments
+      </button>
+      <button
+        style={styles.navItem(activeTab === "exams")}
+        onClick={() => setActiveTab("exams")}
+      >
+        <i className="fas fa-file-alt"></i> Exams
+      </button>
+      <button
+        style={styles.navItem(activeTab === "results")}
+        onClick={() => setActiveTab("results")}
+      >
+        <i className="fas fa-chart-bar"></i> Results
+      </button>
+      <button
+        style={styles.navItem(activeTab === "lessonPlans")}
+        onClick={() => setActiveTab("lessonPlans")}
+      >
+        <i className="fas fa-book-open"></i> Lesson Plans
       </button>
       <button
         style={styles.navItem(activeTab === "attendance")}
         onClick={() => setActiveTab("attendance")}
       >
-        Attendance
+        <i className="fas fa-calendar-check"></i> Attendance
       </button>
       <button
         style={styles.navItem(activeTab === "quizzes")}
         onClick={() => setActiveTab("quizzes")}
       >
-        Quizzes
+        <i className="fas fa-question-circle"></i> Quizzes
       </button>
       <button
         style={styles.navItem(activeTab === "update")}
         onClick={() => setActiveTab("update")}
       >
-        Update Profile
+        <i className="fas fa-edit"></i> Update Profile
       </button>
     </aside>
   );

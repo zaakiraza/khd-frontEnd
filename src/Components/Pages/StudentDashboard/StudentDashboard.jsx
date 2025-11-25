@@ -7,6 +7,11 @@ import Courses from "./Courses/Courses";
 import Attendance from "./Attendance/Attendance";
 import Quizzes from "./Quizzes/Quizzes";
 import UpdateProfile from "./UpdateProfile/UpdateProfile";
+import Assignments from "./Assignments/Assignments";
+import Exams from "./Exams/Exams";
+import Results from "./Results/Results";
+import LessonPlans from "./LessonPlans/LessonPlans";
+import Announcements from "./Announcements/Announcements";
 
 function StudentDashboard() {
   const toast = useToast();
@@ -31,7 +36,7 @@ function StudentDashboard() {
     setLoading(true);
     setError("");
     try {
-      const res = await axios.get(`${BASEURL}/users/single`, headers);
+      const res = await axios.get(`${BASEURL}/users/me`, headers);
       const data = res?.data?.data || null;
       setUserDetails(data);
       setForm(buildInitialForm(data));
@@ -134,8 +139,14 @@ function StudentDashboard() {
     setError("");
     try {
       const payload = { ...form };
+      const userId = userDetails?._id;
+      if (!userId) {
+        toast.showError("User ID not found");
+        setSaving(false);
+        return;
+      }
       const res = await axios.put(
-        `${BASEURL}/users/update_personal`,
+        `${BASEURL}/users/update_personal/${userId}`,
         payload,
         headers
       );
@@ -230,7 +241,12 @@ function StudentDashboard() {
         <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} THEME={THEME} />
         <main style={styles.content}>
           {activeTab === "profile" && <Profile userDetails={userDetails} />}
+          {activeTab === "announcements" && <Announcements userDetails={userDetails} />}
           {activeTab === "courses" && <Courses userDetails={userDetails} />}
+          {activeTab === "assignments" && <Assignments userDetails={userDetails} />}
+          {activeTab === "exams" && <Exams userDetails={userDetails} />}
+          {activeTab === "results" && <Results userDetails={userDetails} />}
+          {activeTab === "lessonPlans" && <LessonPlans userDetails={userDetails} />}
           {activeTab === "attendance" && <Attendance userDetails={userDetails} />}
           {activeTab === "quizzes" && <Quizzes userDetails={userDetails} />}
           {activeTab === "update" && (
