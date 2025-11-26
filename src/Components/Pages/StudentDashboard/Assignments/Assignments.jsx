@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { Link } from "react-router-dom";
+import api from "../../../../utils/api";
 import { useToast } from "../../../Common/Toast/ToastContext";
 import "./Assignments.css";
 
 const Assignments = ({ userDetails }) => {
   const toast = useToast();
-  const BASEURL = import.meta.env.VITE_BASEURL;
   const token = localStorage.getItem("token");
   
   const [assignments, setAssignments] = useState([]);
@@ -96,17 +96,17 @@ const Assignments = ({ userDetails }) => {
       setLoading(true);
       const classId = userDetails?.personal_info?.enrolled_class;
       
-      let url = `${BASEURL}/assignment`;
+      let url = "/assignment";
       if (classId && classId !== "null") {
         // If user has a class, fetch assignments for that class
         const classHistory = userDetails?.class_history || [];
         const currentClass = classHistory.find(ch => ch.status === "active");
         if (currentClass?.class_name?._id) {
-          url = `${BASEURL}/assignment/class/${currentClass.class_name._id}`;
+          url = `/assignment/class/${currentClass.class_name._id}`;
         }
       }
       
-      const response = await axios.get(url, {
+      const response = await api.get(url, {
         headers: { Authorization: `Bearer ${token}` },
       });
       
@@ -233,6 +233,31 @@ const Assignments = ({ userDetails }) => {
                 <i className="fas fa-question-circle"></i> {assignment.questions.length} question(s)
               </div>
             )}
+
+            <div style={{ marginTop: 12 }}>
+              <Link
+                to={`/UserDashboard/assignment/${assignment._id}`}
+                style={{
+                  display: "inline-block",
+                  padding: "8px 16px",
+                  background: "#293c5d",
+                  color: "#fff",
+                  borderRadius: 6,
+                  textDecoration: "none",
+                  fontSize: 13,
+                  fontWeight: 600,
+                  transition: "all 0.2s",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "#1e2d47";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "#293c5d";
+                }}
+              >
+                <i className="fas fa-edit"></i> View & Submit
+              </Link>
+            </div>
           </div>
         ))
       )}

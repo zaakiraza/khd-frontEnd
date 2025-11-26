@@ -1,7 +1,18 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./Sidebar.css";
 
-const Sidebar = ({ activeTab, setActiveTab, THEME }) => {
+const Sidebar = ({ activeTab, THEME }) => {
+  const navigate = useNavigate();
+
+  const handleNavigation = (tab) => {
+    if (tab === "profile") {
+      navigate("/UserDashboard");
+    } else {
+      navigate(`/UserDashboard/${tab}`);
+    }
+  };
+
   const styles = {
     sidebar: {
       background: "#fff",
@@ -32,61 +43,61 @@ const Sidebar = ({ activeTab, setActiveTab, THEME }) => {
       </div>
       <button
         style={styles.navItem(activeTab === "profile")}
-        onClick={() => setActiveTab("profile")}
+        onClick={() => handleNavigation("profile")}
       >
         <i className="fas fa-user"></i> Profile
       </button>
       <button
         style={styles.navItem(activeTab === "announcements")}
-        onClick={() => setActiveTab("announcements")}
+        onClick={() => handleNavigation("announcements")}
       >
         <i className="fas fa-bullhorn"></i> Announcements
       </button>
       <button
         style={styles.navItem(activeTab === "courses")}
-        onClick={() => setActiveTab("courses")}
+        onClick={() => handleNavigation("courses")}
       >
         <i className="fas fa-book"></i> Courses
       </button>
       <button
         style={styles.navItem(activeTab === "assignments")}
-        onClick={() => setActiveTab("assignments")}
+        onClick={() => handleNavigation("assignments")}
       >
         <i className="fas fa-tasks"></i> Assignments
       </button>
       <button
         style={styles.navItem(activeTab === "exams")}
-        onClick={() => setActiveTab("exams")}
+        onClick={() => handleNavigation("exams")}
       >
         <i className="fas fa-file-alt"></i> Exams
       </button>
       <button
         style={styles.navItem(activeTab === "results")}
-        onClick={() => setActiveTab("results")}
+        onClick={() => handleNavigation("results")}
       >
         <i className="fas fa-chart-bar"></i> Results
       </button>
       <button
         style={styles.navItem(activeTab === "lessonPlans")}
-        onClick={() => setActiveTab("lessonPlans")}
+        onClick={() => handleNavigation("lessonPlans")}
       >
         <i className="fas fa-book-open"></i> Lesson Plans
       </button>
       <button
         style={styles.navItem(activeTab === "attendance")}
-        onClick={() => setActiveTab("attendance")}
+        onClick={() => handleNavigation("attendance")}
       >
         <i className="fas fa-calendar-check"></i> Attendance
       </button>
       <button
         style={styles.navItem(activeTab === "quizzes")}
-        onClick={() => setActiveTab("quizzes")}
+        onClick={() => handleNavigation("quizzes")}
       >
         <i className="fas fa-question-circle"></i> Quizzes
       </button>
       <button
         style={styles.navItem(activeTab === "update")}
-        onClick={() => setActiveTab("update")}
+        onClick={() => handleNavigation("update")}
       >
         <i className="fas fa-edit"></i> Update Profile
       </button>

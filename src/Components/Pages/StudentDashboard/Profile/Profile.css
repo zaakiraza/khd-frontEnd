@@ -1,10 +1,9 @@
 /* Profile Component Styles */
 .profile-container {
-  background: #f1f3f6;
-  padding: 0;
-  min-height: 100vh;
-  margin: -16px;
-  padding: 24px;
+    background: #f1f3f6;
+    padding: 0;
+    min-height: 100vh;
+    padding: 24px;
 }
 
 /* Header Section */

@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
-import axios from "axios";
+import { useLocation } from "react-router-dom";
+import api from "../../../utils/api";
 import { useToast } from "../../Common/Toast/ToastContext";
 import Sidebar from "./Sidebar/Sidebar";
 import Profile from "./Profile/Profile";
@@ -14,8 +15,8 @@ import LessonPlans from "./LessonPlans/LessonPlans";
 import Announcements from "./Announcements/Announcements";
 
 function StudentDashboard() {
+  const location = useLocation();
   const toast = useToast();
-  const BASEURL = import.meta.env.VITE_BASEURL;
   const token = localStorage.getItem("token");
 
   const [userDetails, setUserDetails] = useState(null);
@@ -23,7 +24,17 @@ function StudentDashboard() {
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
   const [form, setForm] = useState(null);
-  const [activeTab, setActiveTab] = useState("profile");
+
+  // Determine active tab from URL
+  const getActiveTab = () => {
+    const path = location.pathname.split('/').pop();
+    if (path === 'UserDashboard' || path === '') {
+      return 'profile';
+    }
+    return path;
+  };
+
+  const activeTab = getActiveTab();
 
   const THEME = "#293c5d";
 
@@ -36,7 +47,7 @@ function StudentDashboard() {
     setLoading(true);
     setError("");
     try {
-      const res = await axios.get(`${BASEURL}/users/me`, headers);
+      const res = await api.get("/users/me", headers);
       const data = res?.data?.data || null;
       setUserDetails(data);
       setForm(buildInitialForm(data));
@@ -145,8 +156,8 @@ function StudentDashboard() {
         setSaving(false);
         return;
       }
-      const res = await axios.put(
-        `${BASEURL}/users/update_personal/${userId}`,
+      const res = await api.put(
+        `/users/update_personal/${userId}`,
         payload,
         headers
       );
@@ -238,7 +249,7 @@ function StudentDashboard() {
   return (
     <div style={styles.page}>
       <div style={styles.layout}>
-        <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} THEME={THEME} />
+        <Sidebar activeTab={activeTab} THEME={THEME} />
         <main style={styles.content}>
           {activeTab === "profile" && <Profile userDetails={userDetails} />}
           {activeTab === "announcements" && <Announcements userDetails={userDetails} />}

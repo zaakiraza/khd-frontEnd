@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../../../../utils/api";
 import { useToast } from "../../../Common/Toast/ToastContext";
 import "./Attendance.css";
 
 const Attendance = ({ userDetails }) => {
   const toast = useToast();
-  const BASEURL = import.meta.env.VITE_BASEURL;
   const token = localStorage.getItem("token");
 
   const [activeTab, setActiveTab] = useState("attendance");
@@ -201,7 +200,7 @@ const Attendance = ({ userDetails }) => {
   const fetchLeaves = async () => {
     try {
       setLoadingLeaves(true);
-      const response = await axios.get(`${BASEURL}/leave/my-leaves`, {
+      const response = await api.get("/leave/my-leaves", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setLeaves(response.data.data || []);
@@ -228,7 +227,7 @@ const Attendance = ({ userDetails }) => {
 
     try {
       setSubmitting(true);
-      await axios.post(`${BASEURL}/leave`, leaveForm, {
+      await api.post("/leave", leaveForm, {
         headers: { Authorization: `Bearer ${token}` },
       });
       
@@ -255,7 +254,7 @@ const Attendance = ({ userDetails }) => {
     }
 
     try {
-      await axios.delete(`${BASEURL}/leave/${leaveId}`, {
+      await api.delete(`/leave/${leaveId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.showSuccess("Leave request deleted successfully");

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../../../../utils/api";
 import { useToast } from "../../../Common/Toast/ToastContext";
 import "./Announcements.css";
 
 const Announcements = ({ userDetails }) => {
   const toast = useToast();
-  const BASEURL = import.meta.env.VITE_BASEURL;
   const token = localStorage.getItem("token");
   
   const [announcements, setAnnouncements] = useState([]);
@@ -178,7 +177,7 @@ const Announcements = ({ userDetails }) => {
   const fetchAnnouncements = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${BASEURL}/message/announcements`, {
+      const response = await api.get("/message/announcements", {
         headers: { Authorization: `Bearer ${token}` },
       });
       

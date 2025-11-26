@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../../../../utils/api";
 import { useToast } from "../../../Common/Toast/ToastContext";
 import "./Exams.css";
 
 const Exams = ({ userDetails }) => {
   const toast = useToast();
-  const BASEURL = import.meta.env.VITE_BASEURL;
   const token = localStorage.getItem("token");
   
   const [exams, setExams] = useState([]);
@@ -104,12 +103,12 @@ const Exams = ({ userDetails }) => {
       const classHistory = userDetails?.class_history || [];
       const currentClass = classHistory.find(ch => ch.status === "active");
       
-      let url = `${BASEURL}/exam-schedule`;
+      let url = "/exam-schedule";
       if (currentClass?.class_name?._id) {
-        url = `${BASEURL}/exam-schedule/class/${currentClass.class_name._id}`;
+        url = `/exam-schedule/class/${currentClass.class_name._id}`;
       }
       
-      const response = await axios.get(url, {
+      const response = await api.get(url, {
         headers: { Authorization: `Bearer ${token}` },
       });
       

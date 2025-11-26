@@ -1,94 +1,281 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import api from "../../../../utils/api";
 import "./Quizzes.css";
 
 const Quizzes = ({ userDetails }) => {
-  const styles = {
-    card: {
-      background: "#fff",
-      border: "1px solid #eee",
-      borderRadius: 8,
-      padding: 16,
-      boxShadow: "0 1px 2px rgba(0,0,0,0.04)",
-    },
-    sectionHeader: {
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      marginBottom: 12,
-    },
-    h2: { fontSize: 18, margin: 0 },
-    table: { width: "100%", borderCollapse: "collapse" },
-    thtd: {
-      borderBottom: "1px solid #eee",
-      padding: "8px 6px",
-      textAlign: "left",
-      fontSize: 13,
-    },
-    small: { fontSize: 12, color: "#666" },
-  };
+  const navigate = useNavigate();
+  const [quizzes, setQuizzes] = useState([]);
+  const [attempts, setAttempts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState("available");
 
-  const classes = userDetails?.class_history || [];
+  useEffect(() => {
+    fetchQuizzes();
+    fetchAttempts();
+  }, [userDetails]);
 
-  const calcQuizMarks = (item, idx) => {
-    const base = item?.status === "completed" ? 85 : 70;
-    const q1 = Math.min(100, base + (((idx + 1) * 3) % 10));
-    const q2 = Math.min(100, base + (((idx + 2) * 5) % 12));
-    const q3 = Math.min(100, base + (((idx + 3) * 4) % 8));
-    return [q1, q2, q3];
-  };
+  const fetchQuizzes = async () => {
+    try {
+      setLoading(true);
+      const classes = userDetails?.class_history || [];
+      
+      if (classes.length === 0) {
+        setQuizzes([]);
+        setLoading(false);
+        return;
+      }
 
-  const labelFrom = (entity, key) => {
-    if (!entity) return "-";
-    if (typeof entity === "string") return `${entity.slice(0, 6)}…`;
-    if (entity && typeof entity === "object") {
-      return entity[key] || entity.name || JSON.stringify(entity).slice(0, 12);
+      const currentClass = classes[classes.length - 1];
+      const classId = currentClass?.class_name?._id || currentClass;
+      // console.log(currentClass);
+      // console.log(classId);
+
+      const response = await api.get(`/quiz/class/${classId}`);
+      if (response.data.status) {
+        console.log(response);
+        const publishedQuizzes = response.data.data.filter(
+          (quiz) => quiz.status === "published"
+        );
+        setQuizzes(publishedQuizzes); 
+      }
+    } catch (error) {
+      console.error("Error fetching quizzes:", error);
+    } finally {
+      setLoading(false);
     }
-    return "-";
   };
+
+  const fetchAttempts = async () => {
+    try {
+      const response = await api.get("/quiz-attempt/my-attempts");
+      if (response.data.success) {
+        setAttempts(response.data.data);
+      }
+    } catch (error) {
+      console.error("Error fetching attempts:", error);
+    }
+  };
+
+  const hasAttempted = (quizId) => {
+    return attempts.some((attempt) => attempt.quiz_id._id === quizId);
+  };
+
+  const getAttemptForQuiz = (quizId) => {
+    return attempts.find((attempt) => attempt.quiz_id._id === quizId);
+  };
+
+  const handleTakeQuiz = (quizId) => {
+    navigate(`/UserDashboard/quiz/${quizId}`);
+  };
+
+  const handleViewResult = (quizId) => {
+    navigate(`/UserDashboard/quiz/${quizId}/result`);
+  };
+
+  const formatDate = (dateString) => {
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+  };
+
+  const getStatusBadge = (quiz) => {
+    const now = new Date();
+    const quizDate = new Date(quiz.quiz_date);
+    const endTime = new Date(quiz.end_time);
+
+    if (now < quizDate) {
+      return <span className="status-badge upcoming">Upcoming</span>;
+    } else if (now >= quizDate && now <= endTime) {
+      return <span className="status-badge active">Active</span>;
+    } else {
+      return <span className="status-badge completed">Completed</span>;
+    }
+  };
+
+  const availableQuizzes = quizzes.filter((quiz) => !hasAttempted(quiz._id));
+  const attemptedQuizzes = quizzes.filter((quiz) => hasAttempted(quiz._id));
+
+  if (loading) {
+    return (
+      <div className="quizzes-container">
+        <p>Loading quizzes...</p>
+      </div>
+    );
+  }
 
   return (
-    <div style={{ ...styles.card }}>
-      <div style={styles.sectionHeader}>
-        <h2 style={styles.h2}>Quiz Marks</h2>
+    <div className="quizzes-container">
+      <div className="quizzes-header">
+        <h2>My Quizzes</h2>
+        <div className="quiz-stats">
+          <div className="stat-item">
+            <span className="stat-value">{quizzes.length}</span>
+            <span className="stat-label">Total</span>
+          </div>
+          <div className="stat-item">
+            <span className="stat-value">{availableQuizzes.length}</span>
+            <span className="stat-label">Available</span>
+          </div>
+          <div className="stat-item">
+            <span className="stat-value">{attemptedQuizzes.length}</span>
+            <span className="stat-label">Attempted</span>
+          </div>
+        </div>
       </div>
-      <table style={styles.table}>
-        <thead>
-          <tr>
-            <th style={styles.thtd}>Course</th>
-            <th style={styles.thtd}>Quiz 1</th>
-            <th style={styles.thtd}>Quiz 2</th>
-            <th style={styles.thtd}>Quiz 3</th>
-            <th style={styles.thtd}>Average</th>
-          </tr>
-        </thead>
-        <tbody>
-          {classes.length === 0 ? (
-            <tr>
-              <td style={styles.thtd} colSpan={5}>
-                No data
-              </td>
-            </tr>
-          ) : (
-            classes.map((c, idx) => {
-              const [q1, q2, q3] = calcQuizMarks(c, idx);
-              const avg = Math.round((q1 + q2 + q3) / 3);
-              return (
-                <tr key={`quiz-${c?._id || idx}`}>
-                  <td style={styles.thtd}>
-                    {labelFrom(c?.class_name, "class_name")}
-                  </td>
-                  <td style={styles.thtd}>{q1}</td>
-                  <td style={styles.thtd}>{q2}</td>
-                  <td style={styles.thtd}>{q3}</td>
-                  <td style={styles.thtd}>{avg}</td>
-                </tr>
-              );
-            })
-          )}
-        </tbody>
-      </table>
-      <div style={styles.small}>
-        Note: Placeholder values until backend quizzes API is available.
+
+      <div className="quiz-tabs">
+        <button
+          className={`tab-btn ${activeTab === "available" ? "active" : ""}`}
+          onClick={() => setActiveTab("available")}
+        >
+          Available ({availableQuizzes.length})
+        </button>
+        <button
+          className={`tab-btn ${activeTab === "attempted" ? "active" : ""}`}
+          onClick={() => setActiveTab("attempted")}
+        >
+          Attempted ({attemptedQuizzes.length})
+        </button>
+      </div>
+
+      <div className="quiz-list">
+        {activeTab === "available" && (
+          <>
+            {availableQuizzes.length === 0 ? (
+              <div className="empty-state">
+                <p>No available quizzes at the moment</p>
+              </div>
+            ) : (
+              availableQuizzes.map((quiz) => (
+                <div key={quiz._id} className="quiz-card">
+                  <div className="quiz-header">
+                    <div>
+                      <h3>{quiz.title}</h3>
+                      <p className="quiz-subject">{quiz.subject}</p>
+                    </div>
+                    {getStatusBadge(quiz)}
+                  </div>
+
+                  <div className="quiz-details">
+                    <div className="detail-item">
+                      <span className="detail-label">Date:</span>
+                      <span className="detail-value">
+                        {formatDate(quiz.quiz_date)}
+                      </span>
+                    </div>
+                    <div className="detail-item">
+                      <span className="detail-label">Duration:</span>
+                      <span className="detail-value">{quiz.duration} mins</span>
+                    </div>
+                    <div className="detail-item">
+                      <span className="detail-label">Total Marks:</span>
+                      <span className="detail-value">{quiz.total_marks}</span>
+                    </div>
+                    <div className="detail-item">
+                      <span className="detail-label">Questions:</span>
+                      <span className="detail-value">
+                        {quiz.questions?.length || 0}
+                      </span>
+                    </div>
+                  </div>
+
+                  {quiz.instructions && (
+                    <div className="quiz-instructions">
+                      <strong>Instructions:</strong>
+                      <p>{quiz.instructions}</p>
+                    </div>
+                  )}
+
+                  <div className="quiz-actions">
+                    <button
+                      className="btn-take-quiz"
+                      onClick={() => handleTakeQuiz(quiz._id)}
+                    >
+                      Take Quiz
+                    </button>
+                  </div>
+                </div>
+              ))
+            )}
+          </>
+        )}
+
+        {activeTab === "attempted" && (
+          <>
+            {attemptedQuizzes.length === 0 ? (
+              <div className="empty-state">
+                <p>You haven't attempted any quizzes yet</p>
+              </div>
+            ) : (
+              attemptedQuizzes.map((quiz) => {
+                const attempt = getAttemptForQuiz(quiz._id);
+                return (
+                  <div key={quiz._id} className="quiz-card attempted">
+                    <div className="quiz-header">
+                      <div>
+                        <h3>{quiz.title}</h3>
+                        <p className="quiz-subject">{quiz.subject}</p>
+                      </div>
+                      <span
+                        className={`status-badge ${
+                          attempt.passed ? "passed" : "failed"
+                        }`}
+                      >
+                        {attempt.passed ? "Passed" : "Failed"}
+                      </span>
+                    </div>
+
+                    <div className="quiz-details">
+                      <div className="detail-item">
+                        <span className="detail-label">Score:</span>
+                        <span className="detail-value score">
+                          {attempt.total_marks_obtained} / {quiz.total_marks}
+                        </span>
+                      </div>
+                      <div className="detail-item">
+                        <span className="detail-label">Percentage:</span>
+                        <span className="detail-value">
+                          {attempt.percentage}%
+                        </span>
+                      </div>
+                      <div className="detail-item">
+                        <span className="detail-label">Time Taken:</span>
+                        <span className="detail-value">
+                          {attempt.time_taken} mins
+                        </span>
+                      </div>
+                      <div className="detail-item">
+                        <span className="detail-label">Submitted:</span>
+                        <span className="detail-value">
+                          {formatDate(attempt.submitted_at)}
+                        </span>
+                      </div>
+                    </div>
+
+                    {attempt.feedback && (
+                      <div className="quiz-feedback">
+                        <strong>Feedback:</strong>
+                        <p>{attempt.feedback}</p>
+                      </div>
+                    )}
+
+                    <div className="quiz-actions">
+                      <button
+                        className="btn-view-result"
+                        onClick={() => handleViewResult(quiz._id)}
+                      >
+                        View Details
+                      </button>
+                    </div>
+                  </div>
+                );
+              })
+            )}
+          </>
+        )}
       </div>
     </div>
   );
