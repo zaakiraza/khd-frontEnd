@@ -8,14 +8,16 @@ function Contact() {
       <div className="content">
         <div className="contact-info">
           <p>
-            Asad Ali:{" "}
+            Asad Ali:
             <a href="tel:+923002504457">
+              <i className="fa-solid fa-phone"></i>
               <strong> +92-300-2504457</strong>
             </a>
           </p>
           <p>
-            Zeeshan Haider:{" "}
+            Zeeshan Haider:
             <a href="tel:+923222116921">
+              <i className="fa-solid fa-phone"></i>
               <strong>+92-322-2116921</strong>
             </a>
           </p>
@@ -26,7 +28,7 @@ function Contact() {
             >
               <i className="fa-brands fa-facebook"></i>
             </a>
-            <a href="mailto:info@khuddam.edu" style={{color:"#293c5d"}}>
+            <a href="mailto:info@khuddam.edu" style={{ color: "#293c5d" }}>
               <i className="fa-solid fa-envelope"></i>
             </a>
             <a

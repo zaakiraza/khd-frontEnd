@@ -1,5 +1,5 @@
 /* Attendance Component Styles */
-.attendance-container {
+.attendance-card {
   background: #fff;
   border: 1px solid #eee;
   border-radius: 8px;
@@ -19,30 +19,58 @@
   margin: 0;
 }
 
+/* Tabs */
+.attendance-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  border-bottom: 2px solid #f3f4f6;
+}
+
+.attendance-tab {
+  padding: 8px 16px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 400;
+  color: #666;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: all 0.2s;
+}
+
+.attendance-tab.active {
+  font-weight: 600;
+  color: #293c5d;
+  border-bottom-color: #293c5d;
+}
+
+.attendance-tab:hover {
+  color: #293c5d;
+}
+
+/* Table */
 .attendance-table {
   width: 100%;
   border-collapse: collapse;
 }
 
-.attendance-table th,
-.attendance-table td {
+.attendance-th,
+.attendance-td {
   border-bottom: 1px solid #eee;
   padding: 8px 6px;
   text-align: left;
   font-size: 13px;
 }
 
-.attendance-table th {
+.attendance-th {
   font-weight: 600;
   background: #f9fafb;
 }
 
 .attendance-table tbody tr:hover {
   background: #f9fafb;
-}
-
-.attendance-percentage {
-  font-weight: 600;
 }
 
 .attendance-note {
@@ -52,8 +80,305 @@
   font-style: italic;
 }
 
-.no-data {
+/* Buttons */
+.attendance-btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid #293c5d;
+  background: #293c5d;
+  color: #fff;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.attendance-btn:hover {
+  background: #1e2a47;
+  border-color: #1e2a47;
+}
+
+.attendance-btn-secondary {
+  background: #fff;
+  color: #293c5d;
+  border-color: #ddd;
+}
+
+.attendance-btn-secondary:hover {
+  background: #f9fafb;
+}
+
+.attendance-btn-small {
+  font-size: 12px;
+  padding: 4px 12px;
+}
+
+.attendance-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Leave Actions */
+.attendance-leave-actions {
+  margin-bottom: 16px;
+}
+
+/* Loading and Empty States */
+.attendance-loading,
+.attendance-empty {
   text-align: center;
+  padding: 20px;
   color: #666;
-  font-style: italic;
+}
+
+.attendance-empty i {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+/* Leave Cards */
+.attendance-leave-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+  background: #fafafa;
+}
+
+.attendance-leave-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.attendance-leave-info {
+  flex: 1;
+}
+
+.attendance-leave-type {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.attendance-leave-dates {
+  font-size: 12px;
+  color: #666;
+}
+
+.attendance-leave-reason {
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.attendance-admin-comments {
+  font-size: 12px;
+  color: #666;
+  background: #f9fafb;
+  padding: 8px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+/* Status Badges */
+.attendance-status-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.attendance-status-badge.approved {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.attendance-status-badge.rejected {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.attendance-status-badge.pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+/* Modal */
+.attendance-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.attendance-modal-content {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow: auto;
+}
+
+.attendance-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.attendance-modal-header h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.attendance-close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+}
+
+.attendance-close-btn:hover {
+  color: #333;
+}
+
+/* Form Elements */
+.attendance-form-group {
+  margin-bottom: 16px;
+}
+
+.attendance-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.attendance-input,
+.attendance-textarea {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.attendance-input:focus,
+.attendance-textarea:focus {
+  outline: none;
+  border-color: #293c5d;
+  box-shadow: 0 0 0 2px rgba(41, 60, 93, 0.1);
+}
+
+.attendance-textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.attendance-form-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .attendance-card {
+    padding: 12px;
+    margin: 8px;
+  }
+  
+  .attendance-title {
+    font-size: 16px;
+  }
+  
+  .attendance-tabs {
+    gap: 4px;
+    margin-bottom: 12px;
+  }
+  
+  .attendance-tab {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+  
+  .attendance-table {
+    font-size: 12px;
+  }
+  
+  .attendance-th,
+  .attendance-td {
+    padding: 6px 4px;
+  }
+  
+  .attendance-leave-card {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .attendance-leave-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .attendance-modal-content {
+    width: 95%;
+    padding: 16px;
+    margin: 8px;
+  }
+  
+  .attendance-form-actions {
+    flex-direction: column-reverse;
+    gap: 12px;
+  }
+  
+  .attendance-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .attendance-card {
+    padding: 8px;
+    margin: 4px;
+  }
+  
+  .attendance-meta span {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+  
+  .attendance-leave-type {
+    font-size: 13px;
+  }
+  
+  .attendance-leave-dates {
+    font-size: 11px;
+  }
+  
+  .attendance-modal-content {
+    padding: 12px;
+    max-height: 90vh;
+  }
 }

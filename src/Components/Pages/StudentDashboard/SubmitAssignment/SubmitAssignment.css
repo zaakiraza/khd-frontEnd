@@ -1,3 +1,303 @@
+/* SubmitAssignment Component Styles */
 .submit-assignment-container {
-  /* Placeholder for future custom styles */
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.submit-assignment-card {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.submit-assignment-header {
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #f3f4f6;
+}
+
+.submit-assignment-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #293c5d;
+  margin: 0 0 8px 0;
+}
+
+.submit-assignment-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 14px;
+  color: #666;
+  flex-wrap: wrap;
+}
+
+.submit-assignment-meta span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.submit-assignment-description {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  padding: 12px;
+  background: #f9fafb;
+  border-radius: 6px;
+}
+
+.submit-assignment-description p {
+  margin: 8px 0 0;
+}
+
+/* Loading States */
+.submit-assignment-loading {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+.submit-assignment-loading i {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+/* Submitted Banner */
+.submit-assignment-submitted-banner {
+  background: #dcfce7;
+  color: #166534;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border: 1px solid #86efac;
+}
+
+.submit-assignment-submission-info {
+  margin: 8px 0 0;
+  font-size: 14px;
+}
+
+/* Question Cards */
+.submit-assignment-question-card {
+  background: #fafafa;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.submit-assignment-question-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.submit-assignment-question-number {
+  font-size: 13px;
+  color: #666;
+}
+
+.submit-assignment-marks {
+  font-size: 13px;
+  color: #293c5d;
+  font-weight: 600;
+}
+
+.submit-assignment-question-text {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111;
+  margin-bottom: 12px;
+}
+
+/* Options */
+.submit-assignment-option {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  margin: 8px 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.submit-assignment-option:hover {
+  border-color: #293c5d;
+  background: #f9fafb;
+}
+
+.submit-assignment-option.selected {
+  background: #e0e7ff;
+  border-color: #293c5d;
+}
+
+.submit-assignment-radio {
+  margin-right: 10px;
+}
+
+/* Text Areas */
+.submit-assignment-textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  min-height: 100px;
+  resize: vertical;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.submit-assignment-textarea:focus {
+  outline: none;
+  border-color: #293c5d;
+  box-shadow: 0 0 0 2px rgba(41, 60, 93, 0.1);
+}
+
+/* Buttons */
+.submit-assignment-btn-container {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.submit-assignment-btn {
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.submit-assignment-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.submit-assignment-btn-primary {
+  background: #293c5d;
+  color: #fff;
+}
+
+.submit-assignment-btn-primary:hover:not(:disabled) {
+  background: #1e2a47;
+}
+
+.submit-assignment-btn-secondary {
+  background: #fff;
+  color: #293c5d;
+  border: 1px solid #ddd;
+}
+
+.submit-assignment-btn-secondary:hover:not(:disabled) {
+  background: #f9fafb;
+  border-color: #293c5d;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .submit-assignment-container {
+    padding: 12px;
+  }
+  
+  .submit-assignment-card {
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  
+  .submit-assignment-title {
+    font-size: 20px;
+  }
+  
+  .submit-assignment-meta {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  
+  .submit-assignment-meta span {
+    font-size: 13px;
+  }
+  
+  .submit-assignment-question-card {
+    padding: 12px;
+    margin-bottom: 12px;
+  }
+  
+  .submit-assignment-question-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  
+  .submit-assignment-question-text {
+    font-size: 14px;
+  }
+  
+  .submit-assignment-option {
+    padding: 8px 10px;
+    margin: 6px 0;
+  }
+  
+  .submit-assignment-btn-container {
+    flex-direction: column-reverse;
+    gap: 8px;
+  }
+  
+  .submit-assignment-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .submit-assignment-container {
+    padding: 8px;
+  }
+  
+  .submit-assignment-card {
+    padding: 12px;
+  }
+  
+  .submit-assignment-title {
+    font-size: 18px;
+  }
+  
+  .submit-assignment-description {
+    padding: 8px;
+    font-size: 14px;
+  }
+  
+  .submit-assignment-question-card {
+    padding: 10px;
+  }
+  
+  .submit-assignment-question-text {
+    font-size: 13px;
+  }
+  
+  .submit-assignment-marks {
+    font-size: 12px;
+  }
+  
+  .submit-assignment-textarea {
+    padding: 8px 10px;
+    font-size: 13px;
+    min-height: 80px;
+  }
+  
+  .submit-assignment-btn {
+    padding: 12px 16px;
+    font-size: 13px;
+  }
 }

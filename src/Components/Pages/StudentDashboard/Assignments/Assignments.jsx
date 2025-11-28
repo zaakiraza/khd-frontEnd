@@ -12,81 +12,6 @@ const Assignments = ({ userDetails }) => {
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("all");
 
-  const styles = {
-    card: {
-      background: "#fff",
-      border: "1px solid #eee",
-      borderRadius: 8,
-      padding: 16,
-      boxShadow: "0 1px 2px rgba(0,0,0,0.04)",
-    },
-    header: {
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      marginBottom: 16,
-    },
-    h2: { fontSize: 18, margin: 0 },
-    filterBar: {
-      display: "flex",
-      gap: 8,
-      marginBottom: 12,
-    },
-    filterBtn: (active) => ({
-      padding: "6px 12px",
-      borderRadius: 6,
-      border: active ? "1px solid #293c5d" : "1px solid #ddd",
-      background: active ? "#293c5d" : "#f7f7f7",
-      color: active ? "#fff" : "#333",
-      cursor: "pointer",
-      fontSize: 13,
-    }),
-    assignmentCard: {
-      border: "1px solid #e5e7eb",
-      borderRadius: 8,
-      padding: 12,
-      marginBottom: 12,
-      background: "#fafafa",
-    },
-    assignmentHeader: {
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      marginBottom: 8,
-    },
-    title: {
-      fontSize: 15,
-      fontWeight: 600,
-      color: "#111",
-    },
-    badge: (status) => ({
-      padding: "2px 8px",
-      borderRadius: 999,
-      fontSize: 11,
-      fontWeight: 600,
-      background: status === "published" ? "#dcfce7" : "#fef3c7",
-      color: status === "published" ? "#15803d" : "#a16207",
-      border: `1px solid ${status === "published" ? "#86efac" : "#fde047"}`,
-    }),
-    meta: {
-      display: "flex",
-      gap: 12,
-      fontSize: 12,
-      color: "#666",
-      marginBottom: 8,
-    },
-    description: {
-      fontSize: 13,
-      color: "#555",
-      marginTop: 8,
-    },
-    loading: {
-      textAlign: "center",
-      padding: 20,
-      color: "#666",
-    },
-  };
-
   useEffect(() => {
     fetchAssignments();
   }, []);
@@ -155,8 +80,8 @@ const Assignments = ({ userDetails }) => {
 
   if (loading) {
     return (
-      <div style={styles.card}>
-        <div style={styles.loading}>
+      <div className="assignments-card">
+        <div className="assignments-loading">
           <i className="fas fa-spinner fa-spin"></i> Loading assignments...
         </div>
       </div>
@@ -164,28 +89,28 @@ const Assignments = ({ userDetails }) => {
   }
 
   return (
-    <div style={styles.card}>
-      <div style={styles.header}>
-        <h2 style={styles.h2}>
+    <div className="assignments-card">
+      <div className="assignments-header">
+        <h2 className="assignments-title">
           <i className="fas fa-tasks"></i> My Assignments
         </h2>
       </div>
 
-      <div style={styles.filterBar}>
+      <div className="assignments-filter-bar">
         <button
-          style={styles.filterBtn(filter === "all")}
+          className={`assignments-filter-btn ${filter === "all" ? "active" : ""}`}
           onClick={() => setFilter("all")}
         >
           All ({assignments.length})
         </button>
         <button
-          style={styles.filterBtn(filter === "active")}
+          className={`assignments-filter-btn ${filter === "active" ? "active" : ""}`}
           onClick={() => setFilter("active")}
         >
           Active
         </button>
         <button
-          style={styles.filterBtn(filter === "past")}
+          className={`assignments-filter-btn ${filter === "past" ? "active" : ""}`}
           onClick={() => setFilter("past")}
         >
           Past Due
@@ -193,21 +118,21 @@ const Assignments = ({ userDetails }) => {
       </div>
 
       {filteredAssignments.length === 0 ? (
-        <div style={{ textAlign: "center", padding: 20, color: "#666" }}>
+        <div className="assignments-empty">
           <i className="fas fa-folder-open" style={{ fontSize: 40, marginBottom: 10 }}></i>
           <p>No assignments found</p>
         </div>
       ) : (
         filteredAssignments.map((assignment) => (
-          <div key={assignment._id} style={styles.assignmentCard}>
-            <div style={styles.assignmentHeader}>
-              <div style={styles.title}>{assignment.title}</div>
-              <span style={styles.badge(assignment.status)}>
+          <div key={assignment._id} className="assignment-card">
+            <div className="assignment-header">
+              <div className="assignment-title">{assignment.title}</div>
+              <span className={`assignment-badge ${assignment.status}`}>
                 {assignment.status}
               </span>
             </div>
 
-            <div style={styles.meta}>
+            <div className="assignment-meta">
               <span>
                 <i className="fas fa-book"></i> {assignment.subject}
               </span>
@@ -225,7 +150,7 @@ const Assignments = ({ userDetails }) => {
             </div>
 
             {assignment.description && (
-              <div style={styles.description}>{assignment.description}</div>
+              <div className="assignment-description">{assignment.description}</div>
             )}
 
             {assignment.questions && assignment.questions.length > 0 && (
@@ -237,23 +162,7 @@ const Assignments = ({ userDetails }) => {
             <div style={{ marginTop: 12 }}>
               <Link
                 to={`/UserDashboard/assignment/${assignment._id}`}
-                style={{
-                  display: "inline-block",
-                  padding: "8px 16px",
-                  background: "#293c5d",
-                  color: "#fff",
-                  borderRadius: 6,
-                  textDecoration: "none",
-                  fontSize: 13,
-                  fontWeight: 600,
-                  transition: "all 0.2s",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "#1e2d47";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "#293c5d";
-                }}
+                className="assignment-submit-btn"
               >
                 <i className="fas fa-edit"></i> View & Submit
               </Link>

@@ -1,3 +1,238 @@
-.exams-container {
-  /* Placeholder for future custom styles */
+/* Exams Component Styles */
+.exams-card {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+
+.exams-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.exams-title {
+  font-size: 18px;
+  margin: 0;
+}
+
+.exams-filter-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.exams-filter-btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background: #f7f7f7;
+  color: #333;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s;
+}
+
+.exams-filter-btn.active {
+  border: 1px solid #293c5d;
+  background: #293c5d;
+  color: #fff;
+}
+
+.exam-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 14px;
+  margin-bottom: 12px;
+  background: #fafafa;
+  transition: all 0.2s;
+}
+
+.exam-card:hover {
+  background: #f0f0f0;
+  transform: translateY(-1px);
+}
+
+.exam-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.exam-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111;
+}
+
+.exam-status-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.exam-status-upcoming {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.exam-status-ongoing {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.exam-status-completed {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.exam-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.exam-description {
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 12px;
+}
+
+.exam-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.exam-btn {
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: none;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.exam-btn-primary {
+  background: #293c5d;
+  color: white;
+}
+
+.exam-btn-primary:hover {
+  background: #1e293b;
+}
+
+.exam-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.exams-loading,
+.exams-empty {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+/* Exam Taking Interface */
+.exam-interface {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.exam-interface-header {
+  background: #293c5d;
+  color: white;
+  padding: 16px;
+  border-radius: 8px 8px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.exam-timer {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.exam-question {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-top: none;
+  padding: 20px;
+}
+
+.exam-question-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.exam-question-text {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.exam-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.exam-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.exam-option:hover {
+  background: #f9fafb;
+}
+
+.exam-option.selected {
+  background: #dbeafe;
+  border-color: #3b82f6;
+}
+
+.exam-navigation {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-top: none;
+  padding: 16px;
+  border-radius: 0 0 8px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.exam-submit-btn {
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.exam-submit-btn:hover {
+  background: #b91c1c;
 }

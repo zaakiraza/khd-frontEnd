@@ -1,35 +1,45 @@
+/* Testimonials Section */
 .testi {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 67vh;
-  gap: 18px;
+  padding: 4rem 2rem;
+  gap: 1.5rem;
   background-color: #e4e7e9;
 }
 
 .testi h1,
 .recent h1 {
-  font-size: 45px;
+  font-size: 2.8rem;
   color: #293c5d;
   font-weight: bold;
   text-align: center;
+  margin-bottom: 0.5rem;
 }
 
 .testi hr,
 .recent hr {
-  height: 2px;
+  height: 3px;
   width: 40%;
+  min-width: 120px;
   border: none;
-  border-top: 3px solid #293c5d;
-  margin: 0 auto 16px auto;
-  background-color: transparent;
+  background: linear-gradient(90deg, #293c5d 0%, #4a5f8f 100%);
+  margin: 0 auto 1rem auto;
+  border-radius: 2px;
 }
 
 .testi img {
   width: 60px;
-  margin: 0 auto 10px auto;
+  height: auto;
+  margin: 0 auto 1rem auto;
   display: block;
+  transition: transform 0.3s ease;
+}
+
+.testi img:hover {
+  transform: scale(1.1);
 }
 
 .quotes {
@@ -40,6 +50,7 @@
   flex-direction: column;
   align-items: center;
   position: relative;
+  padding: 0 1rem;
 }
 
 .carousel {
@@ -48,113 +59,162 @@
   justify-content: center;
   width: 100%;
   position: relative;
+  min-height: 120px;
 }
 
 .carousel-content {
   flex: 1;
   text-align: center;
-  padding: 0 40px;
+  padding: 0 2.5rem;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .quote-text {
-  font-size: 19px;
+  font-size: 1.2rem;
   font-style: italic;
   color: #3a3a3a;
   font-weight: 600;
-  margin-bottom: 18px;
-  line-height: 25px;
+  margin-bottom: 1.2rem;
+  line-height: 1.6;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .quote-name {
   font-size: 1.1rem;
   color: #293c5d;
   font-weight: bold;
-  margin-top: 8px;
+  margin-top: 0.5rem;
 }
 
 .arrow {
-  background: rgba(100, 100, 100, 0.3);
-  border: none;
+  background: rgba(41, 60, 93, 0.8);
+  border: 2px solid rgba(255, 255, 255, 0.3);
   color: white;
-  font-size: 2.2rem;
+  font-size: 1.5rem;
   width: 44px;
   height: 44px;
-  border-radius: 8px;
+  border-radius: 50%;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s;
+  transition: all 0.3s ease;
   position: relative;
   z-index: 1;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
+
 .arrow:hover {
   background: #4a5f8f;
-  color: #fff;
+  border-color: #4a5f8f;
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
 }
+
+.arrow:active {
+  transform: scale(0.95);
+}
+
 .arrow.left {
-  margin-right: 12px;
+  margin-right: 1rem;
 }
+
 .arrow.right {
-  margin-left: 12px;
+  margin-left: 1rem;
 }
 
 .carousel-dots {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 18px;
-  gap: 8px;
+  margin-top: 1.5rem;
+  gap: 0.75rem;
 }
+
 .dot {
   width: 12px;
   height: 12px;
   border-radius: 50%;
   background: #ccc;
+  border: 2px solid transparent;
   display: inline-block;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
+
+.dot:hover {
+  background: #999;
+  transform: scale(1.2);
+}
+
 .dot.active {
   background: #293c5d;
+  transform: scale(1.3);
+  box-shadow: 0 0 10px rgba(41, 60, 93, 0.5);
+}
+
+.dot.active::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #293c5d, #4a5f8f);
+  z-index: -1;
 }
 
 /* Recent Lectures Videos Grid */
 .recent {
   width: 100%;
   max-width: 1200px;
-  margin: 70px auto 40px auto;
+  margin: 4rem auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 40px;
+  padding: 0 2rem;
 }
 
 .youVideos {
   width: 100%;
-  margin-top: 20px;
+  margin-top: 2rem;
 }
 
 .videosGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-  gap: 40px 50px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.5rem;
   width: 100%;
+  margin-top: 1rem;
 }
 
 .videoWrapper {
   width: 100%;
   position: relative;
-  z-index: -2;
-  border-radius: 4px;
+  border-radius: 12px;
   overflow: hidden;
   background: #000;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
-  transition: transform 0.25s, box-shadow 0.25s;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 .videoWrapper:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
 }
 
 .videoWrapper iframe {
@@ -166,27 +226,171 @@
 }
 
 .videoTitle {
-  font-size: 15px;
+  font-size: 0.95rem;
   font-weight: 600;
   color: #333;
-  margin-top: 10px;
-  line-height: 1.35;
+  margin-top: 0.75rem;
+  line-height: 1.4;
   text-align: left;
   font-family: "Poppins", sans-serif;
 }
 
-@media (max-width: 900px) {
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .testi h1,
+  .recent h1 {
+    font-size: 2.5rem;
+  }
+  
+  .quote-text {
+    font-size: 1.1rem;
+  }
+  
   .videosGrid {
-    gap: 30px;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
   }
 }
 
-@media (max-width: 600px) {
-  .recent h1 {
-    font-size: 36px;
+@media (max-width: 768px) {
+  .testi {
+    padding: 3rem 1rem;
+    min-height: 60vh;
   }
+  
+  .recent {
+    padding: 0 1rem;
+    margin: 3rem auto;
+  }
+  
+  .testi h1,
+  .recent h1 {
+    font-size: 2.2rem;
+  }
+  
+  .testi hr,
+  .recent hr {
+    width: 50%;
+    min-width: 100px;
+  }
+  
+  .carousel-content {
+    padding: 0 1rem;
+  }
+  
+  .quote-text {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  .quote-name {
+    font-size: 1rem;
+  }
+  
+  .arrow {
+    width: 40px;
+    height: 40px;
+    font-size: 1.3rem;
+  }
+  
+  .arrow.left {
+    margin-right: 0.75rem;
+  }
+  
+  .arrow.right {
+    margin-left: 0.75rem;
+  }
+  
+  .videosGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    max-width: 500px;
+    margin: 1rem auto 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .testi {
+    padding: 2rem 0.5rem;
+    gap: 1rem;
+  }
+  
+  .recent {
+    margin: 2rem auto;
+  }
+  
+  .testi h1,
+  .recent h1 {
+    font-size: 1.8rem;
+    line-height: 1.2;
+  }
+  
+  .testi img {
+    width: 45px;
+  }
+  
+  .quotes {
+    padding: 0 0.5rem;
+  }
+  
+  .carousel-content {
+    padding: 0 0.5rem;
+  }
+  
+  .quote-text {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+  
+  .quote-name {
+    font-size: 0.9rem;
+  }
+  
+  .arrow {
+    width: 35px;
+    height: 35px;
+    font-size: 1.1rem;
+  }
+  
+  .arrow.left {
+    margin-right: 0.5rem;
+  }
+  
+  .arrow.right {
+    margin-left: 0.5rem;
+  }
+  
+  .dot {
+    width: 10px;
+    height: 10px;
+  }
+  
+  .carousel-dots {
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  
+  .videosGrid {
+    max-width: 350px;
+  }
+  
   .videoTitle {
-    font-size: 14px;
+    font-size: 0.85rem;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+  .testi h1,
+  .recent h1 {
+    font-size: 1.5rem;
+  }
+  
+  .quote-text {
+    font-size: 0.85rem;
+  }
+  
+  .carousel {
+    min-height: 100px;
   }
 }

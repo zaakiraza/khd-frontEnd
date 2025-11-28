@@ -86,9 +86,9 @@ function Testimonials() {
           throw new Error("Channel uploads playlist not found");
         }
 
-        // Step 2: fetch latest 4 videos from uploads playlist
+        // Step 2: fetch latest 6 videos from uploads playlist
         const vidsResp = await fetch(
-          `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&playlistId=${uploadsPlaylistId}&maxResults=4&key=${apiYoutubeKey}`
+          `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&playlistId=${uploadsPlaylistId}&maxResults=6&key=${apiYoutubeKey}`
         );
         if (!vidsResp.ok) throw new Error("Failed to fetch videos");
         const vidsData = await vidsResp.json();

@@ -5,6 +5,7 @@ import "./Navbar.css";
 function Navbar() {
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 600);
@@ -29,30 +30,34 @@ function Navbar() {
       <div className="logo">
         <img src="/logo.png" alt="Logo" />
       </div>
-      <ul className="navItems">
+      
+      <button 
+        className="menu-toggle"
+        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      
+      <ul className={`navItems ${mobileMenuOpen ? 'active' : ''}`}>
         <li>
-          <button>Urdu</button>
+          <Link to="/#home" onClick={() => setMobileMenuOpen(false)}>Home</Link>
         </li>
         <li>
-          <button>English</button>
+          <Link to="/#about" onClick={() => setMobileMenuOpen(false)}>About</Link>
         </li>
         <li>
-          <Link to="/#home">Home</Link>
+          <Link to="/#testimonials" onClick={() => setMobileMenuOpen(false)}>Testimonials</Link>
         </li>
         <li>
-          <Link to="/#about">About</Link>
+          <Link to="/#contact" onClick={() => setMobileMenuOpen(false)}>Contact</Link>
         </li>
         <li>
-          <Link to="/#testimonials">Testimonials</Link>
+          <Link to="/new-admission/form" onClick={() => setMobileMenuOpen(false)}>Register</Link>
         </li>
         <li>
-          <Link to="/#contact">Contact</Link>
-        </li>
-        <li>
-          <Link to="/new-admission/form">Register</Link>
-        </li>
-        <li>
-          <Link to="/login-student">Login</Link>
+          <Link to="/login-student" onClick={() => setMobileMenuOpen(false)}>Login</Link>
         </li>
       </ul>
     </nav>

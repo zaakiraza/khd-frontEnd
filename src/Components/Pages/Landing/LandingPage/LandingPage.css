@@ -1,0 +1,50 @@
+/* LandingPage Component Styles */
+.landing-page {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.landing-section {
+  width: 100%;
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
+/* Responsive spacing for sections */
+@media (max-width: 768px) {
+  .landing-section {
+    min-height: auto;
+    padding: 20px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .landing-section {
+    padding: 15px 0;
+  }
+}
+
+/* Smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Base responsive utilities for landing components */
+.section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+@media (max-width: 768px) {
+  .section-container {
+    padding: 0 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-container {
+    padding: 0 10px;
+  }
+}

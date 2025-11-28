@@ -4,10 +4,12 @@ import NotFound from "./Components/Common/NotFound/NotFound";
 import LandingPage from "./Components/Pages/Landing/LandingPage/LandingPage";
 import LoginStudent from "./Components/Pages/Login/LoginUser";
 import Navbar from "./Components/Common/Navbar/Navbar";
-import StudentDashboard from "./Components/Pages/StudentDashboard/StudentDashboard";
+import StudentDashboard from "./Components/Pages/StudentDashboard/Dashboard/StudentDashboard";
 import SubmitAssignment from "./Components/Pages/StudentDashboard/SubmitAssignment/SubmitAssignment";
 import TakeQuiz from "./Components/Pages/StudentDashboard/TakeQuiz/TakeQuiz";
 import VerifyOtp from "./Components/Pages/VerifyOtp/VerifyOtp";
+import NewsletterVerify from "./Components/Pages/NewsletterVerify/NewsletterVerify";
+import NewsletterUnsubscribe from "./Components/Pages/NewsletterUnsubscribe/NewsletterUnsubscribe";
 import PrivateRoute from "./Components/Routes/PrivateRoutes";
 import { ToastProvider } from "./Components/Common/Toast/ToastContext";
 import { useLocation } from "react-router-dom";
@@ -32,6 +34,8 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="home" element={<LandingPage />} />
         <Route path="/new-admission/form" element={<NewAdmissions />} />
+        <Route path="/newsletter/verify/:token" element={<NewsletterVerify />} />
+        <Route path="/newsletter/unsubscribe" element={<NewsletterUnsubscribe />} />
 
         {/* LOGIN STUDENT */}
         <Route path="/login-student" element={<LoginStudent />} />

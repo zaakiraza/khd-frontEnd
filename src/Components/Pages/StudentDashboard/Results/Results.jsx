@@ -10,83 +10,6 @@ const Results = ({ userDetails }) => {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const styles = {
-    card: {
-      background: "#fff",
-      border: "1px solid #eee",
-      borderRadius: 8,
-      padding: 16,
-      boxShadow: "0 1px 2px rgba(0,0,0,0.04)",
-    },
-    header: {
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      marginBottom: 16,
-    },
-    h2: { fontSize: 18, margin: 0 },
-    table: { width: "100%", borderCollapse: "collapse", marginTop: 12 },
-    thtd: {
-      borderBottom: "1px solid #eee",
-      padding: "10px 8px",
-      textAlign: "left",
-      fontSize: 13,
-    },
-    th: {
-      fontWeight: 600,
-      color: "#555",
-    },
-    badge: (grade) => {
-      const colors = {
-        A: { bg: "#dcfce7", color: "#15803d" },
-        B: { bg: "#dbeafe", color: "#1e40af" },
-        C: { bg: "#fef3c7", color: "#a16207" },
-        D: { bg: "#fee2e2", color: "#b91c1c" },
-        F: { bg: "#f3f4f6", color: "#374151" },
-      };
-      const c = colors[grade] || colors.F;
-      return {
-        padding: "3px 10px",
-        borderRadius: 999,
-        fontSize: 12,
-        fontWeight: 600,
-        background: c.bg,
-        color: c.color,
-        display: "inline-block",
-      };
-    },
-    loading: {
-      textAlign: "center",
-      padding: 20,
-      color: "#666",
-    },
-    statCard: {
-      background: "#f9fafb",
-      border: "1px solid #e5e7eb",
-      borderRadius: 8,
-      padding: 12,
-      marginBottom: 16,
-    },
-    statGrid: {
-      display: "grid",
-      gridTemplateColumns: "repeat(auto-fit, minmax(120px, 1fr))",
-      gap: 12,
-    },
-    statItem: {
-      textAlign: "center",
-    },
-    statValue: {
-      fontSize: 20,
-      fontWeight: 700,
-      color: "#293c5d",
-    },
-    statLabel: {
-      fontSize: 11,
-      color: "#666",
-      marginTop: 4,
-    },
-  };
-
   useEffect(() => {
     fetchResults();
   }, []);
@@ -144,61 +67,60 @@ const Results = ({ userDetails }) => {
 
   if (loading) {
     return (
-      <div style={styles.card}>
-        <div style={styles.loading}>
+      <div className="results-card">
+        <div className="results-loading">
           <i className="fas fa-spinner fa-spin"></i> Loading results...
         </div>
       </div>
     );
   }
-
   return (
-    <div style={styles.card}>
-      <div style={styles.header}>
-        <h2 style={styles.h2}>
+    <div className="results-card">
+      <div className="results-header">
+        <h2 className="results-title">
           <i className="fas fa-chart-bar"></i> Exam Results
         </h2>
       </div>
 
       {results.length > 0 && (
-        <div style={styles.statCard}>
-          <div style={styles.statGrid}>
-            <div style={styles.statItem}>
-              <div style={styles.statValue}>{stats.totalExams}</div>
-              <div style={styles.statLabel}>Total Exams</div>
+        <div className="results-stat-card">
+          <div className="results-stat-grid">
+            <div className="results-stat-item">
+              <div className="results-stat-value">{stats.totalExams}</div>
+              <div className="results-stat-label">Total Exams</div>
             </div>
-            <div style={styles.statItem}>
-              <div style={styles.statValue}>{stats.avgMarks}</div>
-              <div style={styles.statLabel}>Avg Marks</div>
+            <div className="results-stat-item">
+              <div className="results-stat-value">{stats.avgMarks}</div>
+              <div className="results-stat-label">Avg Marks</div>
             </div>
-            <div style={styles.statItem}>
-              <div style={styles.statValue}>{stats.avgPercentage}%</div>
-              <div style={styles.statLabel}>Avg Percentage</div>
+            <div className="results-stat-item">
+              <div className="results-stat-value">{stats.avgPercentage}%</div>
+              <div className="results-stat-label">Avg Percentage</div>
             </div>
-            <div style={styles.statItem}>
-              <div style={styles.statValue}>{stats.passedExams}</div>
-              <div style={styles.statLabel}>Passed</div>
+            <div className="results-stat-item">
+              <div className="results-stat-value">{stats.passedExams}</div>
+              <div className="results-stat-label">Passed</div>
             </div>
           </div>
         </div>
       )}
 
       {results.length === 0 ? (
-        <div style={{ textAlign: "center", padding: 20, color: "#666" }}>
-          <i className="fas fa-file-alt" style={{ fontSize: 40, marginBottom: 10 }}></i>
+        <div className="results-empty">
+          <i className="fas fa-file-alt"></i>
           <p>No results available yet</p>
         </div>
       ) : (
-        <table style={styles.table}>
+        <table className="results-table">
           <thead>
             <tr>
-              <th style={{ ...styles.thtd, ...styles.th }}>Exam</th>
-              <th style={{ ...styles.thtd, ...styles.th }}>Subject</th>
-              <th style={{ ...styles.thtd, ...styles.th }}>Obtained</th>
-              <th style={{ ...styles.thtd, ...styles.th }}>Total</th>
-              <th style={{ ...styles.thtd, ...styles.th }}>Percentage</th>
-              <th style={{ ...styles.thtd, ...styles.th }}>Grade</th>
-              <th style={{ ...styles.thtd, ...styles.th }}>Status</th>
+              <th>Exam</th>
+              <th>Subject</th>
+              <th>Obtained</th>
+              <th>Total</th>
+              <th>Percentage</th>
+              <th>Grade</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
@@ -209,20 +131,16 @@ const Results = ({ userDetails }) => {
               
               return (
                 <tr key={result._id}>
-                  <td style={styles.thtd}>{result.exam_id?.exam_name || "N/A"}</td>
-                  <td style={styles.thtd}>{result.exam_id?.subject || "N/A"}</td>
-                  <td style={styles.thtd}>{result.obtained_marks}</td>
-                  <td style={styles.thtd}>{result.total_marks}</td>
-                  <td style={styles.thtd}>{percentage}%</td>
-                  <td style={styles.thtd}>
-                    <span style={styles.badge(grade)}>{grade}</span>
+                  <td>{result?.exam_name}</td>
+                  <td>{result?.subject}</td>
+                  <td>{result.marks_obtained}</td>
+                  <td>{result.total_marks}</td>
+                  <td>{result.percentage}%</td>
+                  <td>
+                    <span className={`results-grade-badge results-badge-${grade.replace('+', '-plus')}`}>{grade}</span>
                   </td>
-                  <td style={styles.thtd}>
-                    <span style={{
-                      color: passed ? "#15803d" : "#b91c1c",
-                      fontWeight: 600,
-                      fontSize: 12,
-                    }}>
+                  <td>
+                    <span className={passed ? "results-status-pass" : "results-status-fail"}>
                       {passed ? "✓ Pass" : "✗ Fail"}
                     </span>
                   </td>

@@ -1,18 +1,20 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
-import api from "../../../utils/api";
-import { useToast } from "../../Common/Toast/ToastContext";
-import Sidebar from "./Sidebar/Sidebar";
-import Profile from "./Profile/Profile";
-import Courses from "./Courses/Courses";
-import Attendance from "./Attendance/Attendance";
-import Quizzes from "./Quizzes/Quizzes";
-import UpdateProfile from "./UpdateProfile/UpdateProfile";
-import Assignments from "./Assignments/Assignments";
-import Exams from "./Exams/Exams";
-import Results from "./Results/Results";
-import LessonPlans from "./LessonPlans/LessonPlans";
-import Announcements from "./Announcements/Announcements";
+import api from "../../../../utils/api";
+import { useToast } from "../../../Common/Toast/ToastContext";
+import "./StudentDashboard.css";
+import Sidebar from "../Sidebar/Sidebar";
+import Profile from "../Profile/Profile";
+import Courses from "../Courses/Courses";
+import Attendance from "../Attendance/Attendance";
+import Quizzes from "../Quizzes/Quizzes";
+import UpdateProfile from "../UpdateProfile/UpdateProfile";
+import Assignments from "../Assignments/Assignments";
+import Exams from "../Exams/Exams";
+import Results from "../Results/Results";
+import LessonPlans from "../LessonPlans/LessonPlans";
+import Announcements from "../Announcements/Announcements";
+import ChangePassword from "../ChangePassword/ChangePassword";
 
 function StudentDashboard() {
   const location = useLocation();
@@ -192,51 +194,21 @@ function StudentDashboard() {
 
   const safeImg = (u) => u?.personal_info?.img_URL || "/logo.png";
 
-  const styles = {
-    page: { padding: 16, maxWidth: 1200, margin: "0 auto" },
-    layout: {
-      display: "grid",
-      gridTemplateColumns: "240px 1fr",
-      gap: 16,
-      alignItems: "start",
-    },
-    content: {},
-    card: {
-      background: "#fff",
-      border: "1px solid #eee",
-      borderRadius: 8,
-      padding: 16,
-      boxShadow: "0 1px 2px rgba(0,0,0,0.04)",
-    },
-    btn: {
-      padding: "8px 12px",
-      borderRadius: 6,
-      border: "1px solid #ddd",
-      background: "#f7f7f7",
-      cursor: "pointer",
-    },
-    primary: {
-      background: THEME,
-      color: "white",
-      border: `1px solid ${THEME}`,
-    },
-  };
-
   if (loading) {
     return (
-      <div style={styles.page}>
-        <div style={styles.card}>Loading dashboard…</div>
+      <div className="student-dashboard-page">
+        <div className="student-dashboard-card">Loading dashboard…</div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div style={styles.page}>
-        <div style={styles.card}>
-          <div style={{ color: "#b91c1c", marginBottom: 8 }}>{error}</div>
+      <div className="student-dashboard-page">
+        <div className="student-dashboard-card">
+          <div className="student-dashboard-error">{error}</div>
           <button
-            style={{ ...styles.btn, ...styles.primary }}
+            className="student-dashboard-btn student-dashboard-btn-primary"
             onClick={fetchUser}
           >
             Retry
@@ -247,10 +219,10 @@ function StudentDashboard() {
   }
 
   return (
-    <div style={styles.page}>
-      <div style={styles.layout}>
+    <div className="student-dashboard-page">
+      <div className="student-dashboard-layout">
         <Sidebar activeTab={activeTab} THEME={THEME} />
-        <main style={styles.content}>
+        <main className="student-dashboard-content">
           {activeTab === "profile" && <Profile userDetails={userDetails} />}
           {activeTab === "announcements" && <Announcements userDetails={userDetails} />}
           {activeTab === "courses" && <Courses userDetails={userDetails} />}
@@ -271,6 +243,7 @@ function StudentDashboard() {
               setForm={setForm}
             />
           )}
+          {activeTab === "changePassword" && <ChangePassword userDetails={userDetails} />}
         </main>
       </div>
     </div>

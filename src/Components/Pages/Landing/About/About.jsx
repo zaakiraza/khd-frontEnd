@@ -11,14 +11,10 @@ function About() {
             Khuddam Learning Online is a weekly Islamic classes platform for
             boys
             <span> age 10 to 17 years</span>. Interactive{" "}
-            <span>Ulema sessions</span> in Urdu
-          </p>
-          <p>
-            language with the help of Zoom video, Power point presentations,
-            class activities, Q&A sessions from students, class
-          </p>
-          <p>
-            assignments using google forms & <span>bonus questions</span>.
+            <span>Ulema sessions</span> in Urdu language with the help of Zoom
+            video, Power point presentations, class activities, Q&A sessions
+            from students, class assignments using google forms &{" "}
+            <span>bonus questions</span>.
           </p>
         </div>
       </div>

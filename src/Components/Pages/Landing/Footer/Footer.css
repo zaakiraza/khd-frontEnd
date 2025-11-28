@@ -28,7 +28,8 @@
   width: 100%;
   border: none;
   border-radius: 4px 0 0 4px;
-  font-size: 1rem;
+  font-size: 14px;
+  padding: 1px 0 1px 8px;
 }
 
 .footer-section form button {
@@ -41,8 +42,51 @@
   cursor: pointer;
 }
 
-.footer-section form button:hover {
+.footer-section form button:hover:not(:disabled) {
   background: #4a5f8f;
+}
+
+.footer-section form button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.footer-section form input:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Newsletter Message */
+.newsletter-message {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.newsletter-message.success {
+  background: rgba(39, 174, 96, 0.1);
+  border: 1px solid rgba(39, 174, 96, 0.3);
+  color: #27ae60;
+}
+
+.newsletter-message.error {
+  background: rgba(231, 76, 60, 0.1);
+  border: 1px solid rgba(231, 76, 60, 0.3);
+  color: #e74c3c;
 }
 
 .footer-section h4 {
@@ -185,6 +229,25 @@
 }
 
 /* Responsive Design */
+@media (max-width: 1024px) {
+  .footer-content {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+  }
+
+  .footer-section h4 {
+    font-size: 22px;
+  }
+
+  .footer-links a {
+    font-size: 16px;
+  }
+
+  .contact-item a {
+    font-size: 16px;
+  }
+}
+
 @media (max-width: 768px) {
   .footer {
     padding: 2rem 0 0;
@@ -197,43 +260,189 @@
   .footer-content {
     grid-template-columns: 1fr;
     gap: 2rem;
-  }
-
-  .footer-bottom-content {
-    flex-direction: column;
     text-align: center;
   }
 
-  .footer-bottom-links {
+  .footer-section h4 {
+    font-size: 20px;
+    margin-bottom: 1rem;
+  }
+
+  .footer-links a {
+    font-size: 16px;
+    padding-left: 0;
+  }
+
+  .footer-links a:before {
+    display: none;
+  }
+
+  .footer-links a:hover {
+    padding-left: 0;
+  }
+
+  .logo-img {
+    width: 150px;
+    height: 120px;
+    margin: 0 auto 1rem;
+  }
+
+  .footer-logo {
     justify-content: center;
   }
 
-  .logo-text {
-    font-size: 1.5rem;
+  .footer-section form {
+    max-width: 300px;
+    margin: 10px auto 0;
+  }
+
+  .footer-section form input {
+    padding: 0.75rem;
+  }
+
+  .footer-section form button {
+    padding: 0.75rem 1rem;
+  }
+
+  .contact-info {
+    align-items: center;
+    gap: 10px;
+  }
+
+  .contact-item {
+    justify-content: center;
+  }
+
+  .contact-item a {
+    font-size: 16px;
   }
 
   .social-links {
     justify-content: center;
+    margin-top: 1.5rem;
+  }
+
+  .footer-bottom {
+    text-align: center;
+  }
+
+  .footer-bottom p {
+    font-size: 14px;
   }
 }
 
 @media (max-width: 480px) {
+  .footer {
+    padding: 1.5rem 0 0;
+  }
+
   .footer-container {
-    padding: 0 0.75rem;
+    padding: 0 1rem;
+  }
+
+  .footer-content {
+    gap: 1.5rem;
+  }
+
+  .footer-section h4 {
+    font-size: 18px;
+    margin-bottom: 0.75rem;
+  }
+
+  .footer-links a {
+    font-size: 14px;
+  }
+
+  .logo-img {
+    width: 120px;
+    height: 100px;
+  }
+
+  .footer-section h3 {
+    font-size: 16px;
+    margin-bottom: 0.75rem;
+  }
+
+  .footer-section form input {
+    padding: 0.6rem;
+    font-size: 14px;
+  }
+
+  .footer-section form button {
+    padding: 0.6rem 0.8rem;
+    font-size: 14px;
   }
 
   .contact-item {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    text-align: center;
     gap: 0.25rem;
   }
 
-  .contact-icon {
-    margin-right: 0;
+  .contact-item i {
+    margin-bottom: 0.25rem;
   }
 
-  .footer-bottom-links {
-    flex-direction: column;
-    gap: 0.75rem;
+  .contact-item a {
+    font-size: 14px;
+  }
+
+  .social-links {
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .social-link {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
+
+  .social-link i {
+    font-size: 16px;
+  }
+
+  .footer-bottom {
+    padding: 1rem 0;
+    margin-top: 1.5rem;
+  }
+
+  .footer-bottom p {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+  .footer-container {
+    padding: 0 0.5rem;
+  }
+
+  .footer-section h4 {
+    font-size: 16px;
+  }
+
+  .footer-section h3 {
+    font-size: 14px;
+  }
+
+  .logo-img {
+    width: 100px;
+    height: 80px;
+  }
+
+  .footer-section form {
+    max-width: 250px;
+  }
+
+  .contact-item a {
+    font-size: 13px;
+  }
+
+  .social-link {
+    width: 32px;
+    height: 32px;
   }
 }

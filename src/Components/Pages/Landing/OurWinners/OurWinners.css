@@ -337,6 +337,7 @@
 
 .detail-item {
   display: flex;
+  flex-direction: row !important;
   align-items: center;
   gap: 10px;
   font-size: 14px;
@@ -582,41 +583,91 @@
 }
 
 /* Responsive Design */
+@media (max-width: 1024px) {
+  .winner-title {
+    font-size: 44px;
+  }
+  
+  .winnersCards {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    width: 95%;
+  }
+  
+  .winner-image-container {
+    height: 250px;
+  }
+}
+
 @media (max-width: 768px) {
+  .ourWinner {
+    padding: 60px 15px;
+  }
+  
   .winner-title {
     font-size: 36px;
+    flex-direction: column;
+    gap: 15px;
   }
 
   .winnersCards {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 25px;
+    width: 100%;
   }
 
   .session-tabs {
     flex-direction: column;
     width: 100%;
     max-width: 300px;
+    margin: 0 auto 40px;
   }
 
   .session-tab {
     width: 100%;
+    margin-bottom: 8px;
   }
 
   .winners-stats {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
 
   .winner-content {
     flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+  
+  .winner-info {
+    order: 2;
+  }
+  
+  .winner-ranking {
+    order: 1;
+    margin-bottom: 10px;
   }
 
   .rank-badge {
     width: 60px;
     height: 60px;
+    margin: 0 auto;
   }
 
   .rank-number {
     font-size: 28px;
+  }
+  
+  .stat-card {
+    padding: 20px;
+  }
+  
+  .stat-icon {
+    font-size: 36px;
+  }
+  
+  .stat-number {
+    font-size: 32px;
   }
 }
 
@@ -627,13 +678,79 @@
 
   .winner-title {
     font-size: 28px;
+    line-height: 1.2;
   }
 
   .trophy-icon {
-    font-size: 32px;
+    font-size: 24px;
+  }
+  
+  .winner-subtitle {
+    font-size: 16px;
+    padding: 0 10px;
   }
 
   .winner-image-container {
-    height: 220px;
+    height: 200px;
+  }
+  
+  .winnerCard {
+    border-radius: 15px;
+  }
+  
+  .winner-content {
+    padding: 20px 15px;
+  }
+  
+  .winner-name {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .detail-item {
+    font-size: 13px;
+  }
+  
+  .session-tab {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+  
+  .stat-card {
+    padding: 15px;
+  }
+  
+  .stat-number {
+    font-size: 28px;
+  }
+  
+  .stat-label {
+    font-size: 14px;
+  }
+  
+  .card-badge {
+    width: 40px;
+    height: 40px;
+    top: 10px;
+    right: 10px;
+  }
+  
+  .rank-icon {
+    font-size: 20px;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+  .winner-title {
+    font-size: 24px;
+  }
+  
+  .winnersCards {
+    gap: 20px;
+  }
+  
+  .winner-content {
+    padding: 15px 10px;
   }
 }

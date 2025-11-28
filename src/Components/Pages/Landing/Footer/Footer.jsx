@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./Footer.css";
 import { Link, useLocation } from "react-router-dom";
+import api from "../../../../utils/api";
 
 const Footer = () => {
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
+  const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [message, setMessage] = useState("");
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 600);
@@ -23,6 +27,46 @@ const Footer = () => {
       }
     }
   }, [location]);
+
+  const handleNewsletterSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!email) {
+      setMessage("Please enter your email address");
+      return;
+    }
+
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setMessage("Please enter a valid email address");
+      return;
+    }
+
+    setIsSubmitting(true);
+    setMessage("");
+
+    try {
+      const response = await api.post('/newsletter/subscribe', { email });
+      
+      if (response.status === 200 || response.status === 201) {
+        setMessage("✅ " + response.data.message);
+        setEmail("");
+      }
+    } catch (error) {
+      console.error("Newsletter subscription error:", error);
+      const errorMessage = error.response?.data?.message || "Something went wrong. Please try again later.";
+      setMessage("❌ " + errorMessage);
+    } finally {
+      setIsSubmitting(false);
+      
+      // Clear message after 5 seconds
+      setTimeout(() => {
+        setMessage("");
+      }, 5000);
+    }
+  };
+
   return (
     <footer className="footer">
       <div className="footer-container">
@@ -33,12 +77,27 @@ const Footer = () => {
               <img src="/logo.png" alt="Khuddam Logo" className="logo-img" />
             </div>
             <h3>Subscribe to our newsletter</h3>
-            <form>
-              <input type="email" placeholder="Enter Email" />
-              <button type="submit">
-                <i className="fa-solid fa-arrow-right"></i>
+            <form onSubmit={handleNewsletterSubmit}>
+              <input 
+                type="email" 
+                placeholder="Enter Email" 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={isSubmitting}
+              />
+              <button type="submit" disabled={isSubmitting}>
+                {isSubmitting ? (
+                  <i className="fa-solid fa-spinner fa-spin"></i>
+                ) : (
+                  <i className="fa-solid fa-arrow-right"></i>
+                )}
               </button>
             </form>
+            {message && (
+              <div className={`newsletter-message ${message.startsWith('✅') ? 'success' : 'error'}`}>
+                {message}
+              </div>
+            )}
           </div>
 
           {/* Navigation Links */}

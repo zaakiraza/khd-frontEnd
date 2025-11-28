@@ -2,47 +2,17 @@ import React from "react";
 import "./UpdateProfile.css";
 
 const UpdateProfile = ({ form, onChange, saveProfile, saving, userDetails, buildInitialForm, setForm }) => {
-  const styles = {
-    card: {
-      background: "#fff",
-      border: "1px solid #eee",
-      borderRadius: 8,
-      padding: 16,
-      boxShadow: "0 1px 2px rgba(0,0,0,0.04)",
-    },
-    sectionHeader: {
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      marginBottom: 12,
-    },
-    h2: { fontSize: 18, margin: 0 },
-    formGrid: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 },
-    small: { fontSize: 12, color: "#666" },
-    btn: {
-      padding: "8px 12px",
-      borderRadius: 6,
-      border: "1px solid #ddd",
-      background: "#f7f7f7",
-      cursor: "pointer",
-    },
-    primary: {
-      background: "#293c5d",
-      color: "white",
-      border: "1px solid #293c5d",
-    },
-  };
 
   return (
-    <form style={{ ...styles.card }} onSubmit={saveProfile}>
-      <div style={styles.sectionHeader}>
-        <h2 style={styles.h2}>Update Profile</h2>
-        <div style={styles.small}>Please fill all required fields</div>
+    <form className="update-profile-card" onSubmit={saveProfile}>
+      <div className="update-profile-header">
+        <h2 className="update-profile-title">Update Profile</h2>
+        <div className="update-profile-subtitle">Please fill all required fields</div>
       </div>
       {form && (
         <>
           <Section title="Personal Info">
-            <div style={styles.formGrid}>
+            <div className="update-profile-form-grid">
               <Field
                 label="First Name"
                 value={form.personal_info.first_name}
@@ -120,7 +90,7 @@ const UpdateProfile = ({ form, onChange, saveProfile, saving, userDetails, build
           </Section>
 
           <Section title="Guardian Info">
-            <div style={styles.formGrid}>
+            <div className="update-profile-form-grid">
               <Field
                 label="Name"
                 value={form.guardian_info.name}
@@ -155,7 +125,7 @@ const UpdateProfile = ({ form, onChange, saveProfile, saving, userDetails, build
           </Section>
 
           <Section title="Academic Progress">
-            <div style={styles.formGrid}>
+            <div className="update-profile-form-grid">
               <Field
                 type="number"
                 label="Academic Class"
@@ -185,13 +155,13 @@ const UpdateProfile = ({ form, onChange, saveProfile, saving, userDetails, build
                 onChange={(v) => onChange("academic_progress.result", v)}
               />
             </div>
-            <div style={styles.small}>
+            <div className="update-profile-note">
               Note: Backend requires inProgress=false currently.
             </div>
           </Section>
 
           <Section title="Previous Madrassa">
-            <div style={styles.formGrid}>
+            <div className="update-profile-form-grid">
               <Field
                 label="Name"
                 value={form.previous_madrassa.name}
@@ -206,7 +176,7 @@ const UpdateProfile = ({ form, onChange, saveProfile, saving, userDetails, build
           </Section>
 
           <Section title="Bank Info">
-            <div style={styles.formGrid}>
+            <div className="update-profile-form-grid">
               <Field
                 label="Bank Name"
                 value={form.bank_info.bank_name}
@@ -230,17 +200,17 @@ const UpdateProfile = ({ form, onChange, saveProfile, saving, userDetails, build
             </div>
           </Section>
 
-          <div style={{ display: "flex", gap: 8, marginTop: 12 }}>
+          <div className="update-profile-buttons">
             <button
               type="submit"
-              style={{ ...styles.btn, ...styles.primary }}
+              className="update-profile-btn update-profile-btn-primary"
               disabled={saving}
             >
               {saving ? "Saving…" : "Save Changes"}
             </button>
             <button
               type="button"
-              style={styles.btn}
+              className="update-profile-btn"
               onClick={() => setForm(buildInitialForm(userDetails))}
               disabled={saving}
             >
@@ -255,27 +225,21 @@ const UpdateProfile = ({ form, onChange, saveProfile, saving, userDetails, build
 
 function Section({ title, children }) {
   return (
-    <div style={{ marginBottom: 16 }}>
-      <div style={{ fontWeight: 600, marginBottom: 8 }}>{title}</div>
+    <div className="update-profile-section">
+      <div className="update-profile-section-title">{title}</div>
       {children}
     </div>
   );
 }
 
 function Field({ label, value, onChange, type = "text" }) {
-  const inputStyle = {
-    width: "100%",
-    padding: "8px 10px",
-    borderRadius: 6,
-    border: "1px solid #ddd",
-  };
   return (
-    <label>
-      <div style={{ color: "#444", fontSize: 12, marginBottom: 4 }}>
+    <label className="update-profile-field">
+      <div className="update-profile-field-label">
         {label}
       </div>
       <input
-        style={inputStyle}
+        className="update-profile-input"
         value={value ?? ""}
         onChange={(e) => onChange(e.target.value)}
         type={type}
@@ -285,19 +249,13 @@ function Field({ label, value, onChange, type = "text" }) {
 }
 
 function Select({ label, value, onChange, options = [] }) {
-  const inputStyle = {
-    width: "100%",
-    padding: "8px 10px",
-    borderRadius: 6,
-    border: "1px solid #ddd",
-  };
   return (
-    <label>
-      <div style={{ color: "#444", fontSize: 12, marginBottom: 4 }}>
+    <label className="update-profile-field">
+      <div className="update-profile-field-label">
         {label}
       </div>
       <select
-        style={inputStyle}
+        className="update-profile-input"
         value={value}
         onChange={(e) => onChange(e.target.value)}
       >

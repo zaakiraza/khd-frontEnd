@@ -4,6 +4,7 @@ import OurWinners from "../OurWinners/OurWinners";
 import Testimonials from "../Testimonials/Testimonials";
 import Contact from "../Contact/Contact";
 import Footer from "../Footer/Footer";
+import "./LandingPage.css";
 
 function LandingPage() {
   return (

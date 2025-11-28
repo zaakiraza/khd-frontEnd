@@ -1,38 +1,41 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
+/* About Section Styles */
 .about {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 40vh;
-  gap: 18px;
+  min-height: 40vh;
+  padding: 4rem 2rem;
+  gap: 1.5rem;
   background-color: #e4e7e9;
 }
 
 .about h1,
 .learn h1 {
-  font-size: 45px;
+  font-size: 2.8rem;
   color: #293c5d;
+  text-align: center;
+  margin-bottom: 0.5rem;
 }
 
 .about hr,
 .learn hr {
-  height: 2px;
+  height: 3px;
   width: 18%;
-  border: 1px solid #293c5d;
-  background-color: #293c5d;
+  min-width: 80px;
+  border: none;
+  background: linear-gradient(90deg, #293c5d 0%, #4a5f8f 100%);
+  border-radius: 2px;
+  margin-bottom: 1rem;
 }
 
 .text {
-  line-height: 32px;
+  line-height: 1.8;
   text-align: center;
-  font-size: 18px;
+  font-size: 1.125rem;
   color: #7a7a7a;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 span {
@@ -40,23 +43,158 @@ span {
   font-weight: 700;
 }
 
+/* Learn Section Styles */
 .learn {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 65vh;
-  gap: 18px;
+  min-height: 65vh;
+  padding: 4rem 2rem;
+  gap: 1.5rem;
   background-color: #f2f2f2;
 }
 
 .boxes {
-  display: flex;
-  gap: 45px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   justify-content: center;
   align-items: center;
+  width: 100%;
+  max-width: 1200px;
 }
 
 .boxes img {
-    width: 18%;
+  width: 92%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.boxes img:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(41, 60, 93, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .about h1,
+  .learn h1 {
+    font-size: 2.5rem;
+  }
+
+  .text {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+
+  .boxes {
+    gap: 2rem;
+    max-width: 900px;
+  }
+
+  .boxes img {
+    max-width: 180px;
+  }
+}
+
+@media (max-width: 768px) {
+  .about {
+    padding: 3rem 1rem;
+    min-height: 35vh;
+  }
+
+  .learn {
+    padding: 3rem 1rem;
+    min-height: 60vh;
+  }
+
+  .about h1,
+  .learn h1 {
+    font-size: 2.2rem;
+  }
+
+  .about hr,
+  .learn hr {
+    width: 25%;
+    min-width: 100px;
+  }
+
+  .text {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .boxes {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    max-width: 600px;
+  }
+
+  .boxes img {
+    max-width: 160px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about {
+    padding: 2rem 1rem;
+    min-height: 30vh;
+    gap: 1rem;
+  }
+
+  .learn {
+    padding: 2rem 1rem;
+    min-height: auto;
+  }
+
+  .about h1,
+  .learn h1 {
+    font-size: 1.8rem;
+    line-height: 1.2;
+  }
+
+  .about hr,
+  .learn hr {
+    width: 30%;
+    min-width: 80px;
+    height: 2px;
+  }
+
+  .text {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .boxes {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    max-width: 300px;
+    margin-top: 1rem;
+  }
+
+  .boxes img {
+    max-width: 200px;
+    justify-self: center;
+  }
+
+  .boxes img:hover {
+    transform: translateY(-4px) scale(1.02);
+  }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+  .about h1,
+  .learn h1 {
+    font-size: 1.5rem;
+  }
+
+  .text {
+    font-size: 0.85rem;
+  }
+
+  .boxes img {
+    max-width: 180px;
+  }
 }

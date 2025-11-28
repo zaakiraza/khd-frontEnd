@@ -16,137 +16,6 @@ const SubmitAssignment = () => {
   const [answers, setAnswers] = useState({});
   const [existingSubmission, setExistingSubmission] = useState(null);
 
-  const styles = {
-    container: {
-      maxWidth: 900,
-      margin: "0 auto",
-      padding: 20,
-    },
-    card: {
-      background: "#fff",
-      border: "1px solid #eee",
-      borderRadius: 8,
-      padding: 20,
-      marginBottom: 16,
-      boxShadow: "0 1px 2px rgba(0,0,0,0.04)",
-    },
-    header: {
-      marginBottom: 20,
-      paddingBottom: 16,
-      borderBottom: "2px solid #f3f4f6",
-    },
-    title: {
-      fontSize: 24,
-      fontWeight: 700,
-      color: "#293c5d",
-      marginBottom: 8,
-    },
-    meta: {
-      display: "flex",
-      gap: 16,
-      fontSize: 14,
-      color: "#666",
-      flexWrap: "wrap",
-    },
-    description: {
-      fontSize: 15,
-      color: "#555",
-      lineHeight: 1.6,
-      marginBottom: 20,
-      padding: 12,
-      background: "#f9fafb",
-      borderRadius: 6,
-    },
-    questionCard: {
-      background: "#fafafa",
-      border: "1px solid #e5e7eb",
-      borderRadius: 8,
-      padding: 16,
-      marginBottom: 16,
-    },
-    questionHeader: {
-      display: "flex",
-      justifyContent: "space-between",
-      marginBottom: 12,
-    },
-    questionText: {
-      fontSize: 15,
-      fontWeight: 600,
-      color: "#111",
-      marginBottom: 12,
-    },
-    marks: {
-      fontSize: 13,
-      color: "#293c5d",
-      fontWeight: 600,
-    },
-    option: {
-      display: "flex",
-      alignItems: "center",
-      padding: "10px 12px",
-      margin: "8px 0",
-      background: "#fff",
-      border: "1px solid #ddd",
-      borderRadius: 6,
-      cursor: "pointer",
-      transition: "all 0.2s",
-    },
-    optionSelected: {
-      background: "#e0e7ff",
-      borderColor: "#293c5d",
-    },
-    radio: {
-      marginRight: 10,
-    },
-    textarea: {
-      width: "100%",
-      padding: "10px 12px",
-      border: "1px solid #ddd",
-      borderRadius: 6,
-      fontSize: 14,
-      minHeight: 100,
-      resize: "vertical",
-      boxSizing: "border-box",
-    },
-    btnContainer: {
-      display: "flex",
-      gap: 12,
-      justifyContent: "flex-end",
-      marginTop: 20,
-    },
-    btn: {
-      padding: "10px 20px",
-      borderRadius: 6,
-      border: "none",
-      fontSize: 14,
-      fontWeight: 600,
-      cursor: "pointer",
-      transition: "all 0.2s",
-    },
-    btnPrimary: {
-      background: "#293c5d",
-      color: "#fff",
-    },
-    btnSecondary: {
-      background: "#fff",
-      color: "#293c5d",
-      border: "1px solid #ddd",
-    },
-    loading: {
-      textAlign: "center",
-      padding: 40,
-      color: "#666",
-    },
-    submittedBanner: {
-      background: "#dcfce7",
-      color: "#166534",
-      padding: 16,
-      borderRadius: 8,
-      marginBottom: 20,
-      border: "1px solid #86efac",
-    },
-  };
-
   useEffect(() => {
     fetchAssignment();
     checkExistingSubmission();
@@ -251,10 +120,10 @@ const SubmitAssignment = () => {
 
   if (loading) {
     return (
-      <div style={styles.container}>
-        <div style={styles.card}>
-          <div style={styles.loading}>
-            <i className="fas fa-spinner fa-spin" style={{ fontSize: 32 }}></i>
+      <div className="submit-assignment-container">
+        <div className="submit-assignment-card">
+          <div className="submit-assignment-loading">
+            <i className="fas fa-spinner fa-spin"></i>
             <p>Loading assignment...</p>
           </div>
         </div>
@@ -264,8 +133,8 @@ const SubmitAssignment = () => {
 
   if (!assignment) {
     return (
-      <div style={styles.container}>
-        <div style={styles.card}>
+      <div className="submit-assignment-container">
+        <div className="submit-assignment-card">
           <p>Assignment not found</p>
         </div>
       </div>
@@ -273,11 +142,11 @@ const SubmitAssignment = () => {
   }
 
   return (
-    <div style={styles.container}>
+    <div className="submit-assignment-container">
       {existingSubmission && (
-        <div style={styles.submittedBanner}>
+        <div className="submit-assignment-submitted-banner">
           <strong>✓ Already Submitted</strong>
-          <p style={{ margin: "8px 0 0", fontSize: 14 }}>
+          <p className="submit-assignment-submission-info">
             You submitted this assignment on{" "}
             {new Date(existingSubmission.submitted_at).toLocaleString()}
             {existingSubmission.status === "graded" && (
@@ -291,10 +160,10 @@ const SubmitAssignment = () => {
         </div>
       )}
 
-      <div style={styles.card}>
-        <div style={styles.header}>
-          <h1 style={styles.title}>{assignment.title}</h1>
-          <div style={styles.meta}>
+      <div className="submit-assignment-card">
+        <div className="submit-assignment-header">
+          <h1 className="submit-assignment-title">{assignment.title}</h1>
+          <div className="submit-assignment-meta">
             <span>
               <i className="fas fa-book"></i> {assignment.subject}
             </span>
@@ -316,9 +185,9 @@ const SubmitAssignment = () => {
         </div>
 
         {assignment.description && (
-          <div style={styles.description}>
+          <div className="submit-assignment-description">
             <strong>Description:</strong>
-            <p style={{ margin: "8px 0 0" }}>{assignment.description}</p>
+            <p>{assignment.description}</p>
           </div>
         )}
       </div>
@@ -326,33 +195,31 @@ const SubmitAssignment = () => {
       {!existingSubmission && (
         <form onSubmit={handleSubmit}>
           {assignment.questions.map((question, index) => (
-            <div key={question._id} style={styles.questionCard}>
-              <div style={styles.questionHeader}>
-                <span style={{ fontSize: 13, color: "#666" }}>
+            <div key={question._id} className="submit-assignment-question-card">
+              <div className="submit-assignment-question-header">
+                <span className="submit-assignment-question-number">
                   Question {index + 1}
                 </span>
-                <span style={styles.marks}>{question.marks} marks</span>
+                <span className="submit-assignment-marks">{question.marks} marks</span>
               </div>
 
-              <div style={styles.questionText}>{question.question_text}</div>
+              <div className="submit-assignment-question-text">{question.question_text}</div>
 
               {question.question_type === "multiple_choice" && (
                 <div>
                   {question.options.map((option) => (
                     <label
                       key={option._id}
-                      style={{
-                        ...styles.option,
-                        ...(answers[question._id]?.selected_option ===
-                        option._id.toString()
-                          ? styles.optionSelected
-                          : {}),
-                      }}
+                      className={`submit-assignment-option ${
+                        answers[question._id]?.selected_option === option._id.toString()
+                          ? "selected"
+                          : ""
+                      }`}
                     >
                       <input
                         type="radio"
                         name={`question_${question._id}`}
-                        style={styles.radio}
+                        className="submit-assignment-radio"
                         checked={
                           answers[question._id]?.selected_option ===
                           option._id.toString()
@@ -377,17 +244,14 @@ const SubmitAssignment = () => {
                   {["True", "False"].map((option) => (
                     <label
                       key={option}
-                      style={{
-                        ...styles.option,
-                        ...(answers[question._id]?.answer === option
-                          ? styles.optionSelected
-                          : {}),
-                      }}
+                      className={`submit-assignment-option ${
+                        answers[question._id]?.answer === option ? "selected" : ""
+                      }`}
                     >
                       <input
                         type="radio"
                         name={`question_${question._id}`}
-                        style={styles.radio}
+                        className="submit-assignment-radio"
                         checked={answers[question._id]?.answer === option}
                         onChange={() =>
                           handleAnswerChange(question._id, option)
@@ -403,7 +267,7 @@ const SubmitAssignment = () => {
               {(question.question_type === "short_answer" ||
                 question.question_type === "essay") && (
                 <textarea
-                  style={styles.textarea}
+                  className="submit-assignment-textarea"
                   placeholder="Type your answer here..."
                   value={answers[question._id]?.answer || ""}
                   onChange={(e) =>
@@ -416,17 +280,17 @@ const SubmitAssignment = () => {
             </div>
           ))}
 
-          <div style={styles.btnContainer}>
+          <div className="submit-assignment-btn-container">
             <button
               type="button"
-              style={{ ...styles.btn, ...styles.btnSecondary }}
+              className="submit-assignment-btn submit-assignment-btn-secondary"
               onClick={() => navigate("/UserDashboard")}
             >
               Cancel
             </button>
             <button
               type="submit"
-              style={{ ...styles.btn, ...styles.btnPrimary }}
+              className="submit-assignment-btn submit-assignment-btn-primary"
               disabled={submitting}
             >
               {submitting ? (

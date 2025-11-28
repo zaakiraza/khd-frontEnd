@@ -1,5 +1,5 @@
 /* UpdateProfile Component Styles */
-.update-profile-container {
+.update-profile-card {
   background: #fff;
   border: 1px solid #eee;
   border-radius: 8px;
@@ -19,34 +19,38 @@
   margin: 0;
 }
 
-.form-section {
+.update-profile-subtitle {
+  font-size: 12px;
+  color: #666;
+}
+
+.update-profile-section {
   margin-bottom: 16px;
 }
 
-.section-title {
+.update-profile-section-title {
   font-weight: 600;
   margin-bottom: 8px;
 }
 
-.form-grid {
+.update-profile-form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
 }
 
-.form-field {
+.update-profile-field {
   display: flex;
   flex-direction: column;
 }
 
-.field-label {
+.update-profile-field-label {
   color: #444;
   font-size: 12px;
   margin-bottom: 4px;
 }
 
-.field-input,
-.field-select {
+.update-profile-input {
   width: 100%;
   padding: 8px 10px;
   border-radius: 6px;
@@ -54,20 +58,19 @@
   font-size: 14px;
 }
 
-.field-input:focus,
-.field-select:focus {
+.update-profile-input:focus {
   outline: none;
   border-color: #293c5d;
   box-shadow: 0 0 0 2px rgba(41, 60, 93, 0.1);
 }
 
-.form-actions {
+.update-profile-buttons {
   display: flex;
   gap: 8px;
   margin-top: 12px;
 }
 
-.btn {
+.update-profile-btn {
   padding: 8px 12px;
   border-radius: 6px;
   border: 1px solid #ddd;
@@ -77,28 +80,104 @@
   transition: all 0.2s ease;
 }
 
-.btn:hover {
+.update-profile-btn:hover {
   background: #e5e7eb;
 }
 
-.btn:disabled {
+.update-profile-btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
-.btn-primary {
+.update-profile-btn-primary {
   background: #293c5d;
   color: white;
   border-color: #293c5d;
 }
 
-.btn-primary:hover {
+.update-profile-btn-primary:hover {
   background: #1e2a47;
 }
 
-.form-note {
+.update-profile-note {
   font-size: 12px;
   color: #666;
   margin-top: 8px;
   font-style: italic;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .update-profile-card {
+    padding: 12px;
+    margin: 8px;
+  }
+  
+  .update-profile-title {
+    font-size: 16px;
+  }
+  
+  .update-profile-form-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  
+  .update-profile-section {
+    margin-bottom: 12px;
+  }
+  
+  .update-profile-section-title {
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+  
+  .update-profile-field-label {
+    font-size: 11px;
+  }
+  
+  .update-profile-input {
+    padding: 6px 8px;
+    font-size: 13px;
+  }
+  
+  .update-profile-buttons {
+    flex-direction: column-reverse;
+    gap: 8px;
+  }
+  
+  .update-profile-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .update-profile-card {
+    padding: 8px;
+    margin: 4px;
+  }
+  
+  .update-profile-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .update-profile-title {
+    font-size: 15px;
+  }
+  
+  .update-profile-subtitle {
+    font-size: 11px;
+  }
+  
+  .update-profile-input {
+    padding: 8px;
+    font-size: 14px;
+  }
+  
+  .update-profile-btn {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
 }

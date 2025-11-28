@@ -5,3 +5,91 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+/* Base responsive styles */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+}
+
+/* Responsive container utility */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 12px;
+  }
+}
+
+/* Responsive grid utilities */
+.grid {
+  display: grid;
+  gap: 16px;
+}
+
+.grid-1 { grid-template-columns: 1fr; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+@media (max-width: 768px) {
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+  
+  .grid {
+    gap: 12px;
+  }
+}
+
+/* Responsive text utilities */
+.text-responsive {
+  font-size: clamp(14px, 2.5vw, 18px);
+}
+
+.title-responsive {
+  font-size: clamp(18px, 4vw, 24px);
+}
+
+.heading-responsive {
+  font-size: clamp(24px, 5vw, 32px);
+}
+
+/* Hidden utilities for responsive design */
+.hidden-mobile {
+  display: block;
+}
+
+.hidden-desktop {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .hidden-mobile {
+    display: none;
+  }
+  
+  .hidden-desktop {
+    display: block;
+  }
+}
+
+/* Responsive spacing utilities */
+.spacing-responsive {
+  padding: clamp(12px, 3vw, 20px);
+}
+
+.margin-responsive {
+  margin: clamp(8px, 2vw, 16px);
+}
